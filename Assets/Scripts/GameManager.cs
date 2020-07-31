@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public List<Player> players;
 
+    public static Player[] Players { get { return Instance.players.ToArray(); } }
+
     private void Awake()
     {
         if (!Instance) Instance = this;

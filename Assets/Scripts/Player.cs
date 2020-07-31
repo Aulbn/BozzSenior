@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public string playerName;
     public Color color;
     public int points;
+    public int Index { get { return GetComponent<PlayerInput>().user.index; } }
 
     private void Start()
     {
@@ -33,16 +34,12 @@ public class Player : MonoBehaviour
     }
 
     //--Delegates--//
-    public delegate void _OnMove(InputValue value);
-    public delegate void _OnNorth(InputValue value);
-    public delegate void _OnEast(InputValue value);
-    public delegate void _OnSouth(InputValue value);
-    public delegate void _OnWest(InputValue value);
-    public _OnMove onMove;
-    public _OnNorth onNorth;
-    public _OnEast onEast;
-    public _OnSouth onSouth;
-    public _OnWest onWest;
+    public delegate void OnInput(InputValue value);
+    public OnInput onMove;
+    public OnInput onNorth;
+    public OnInput onEast;
+    public OnInput onSouth;
+    public OnInput onWest;
 
     private void OnMove(InputValue value)
     {
