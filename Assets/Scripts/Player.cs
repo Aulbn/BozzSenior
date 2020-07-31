@@ -15,10 +15,22 @@ public class Player : MonoBehaviour
     public int points;
     public int Index { get { return GetComponent<PlayerInput>().user.index; } }
 
+    private PlayerController playerController;
+
     private void Start()
     {
         transform.SetParent(GameManager.Instance.transform);
         GameManager.AddPlayer(this);
+    }
+
+    public void SetController(PlayerController playerController)
+    {
+        this.playerController = playerController;
+    }
+
+    public PlayerController GetController()
+    {
+        return playerController;
     }
 
     public void Disconnect()

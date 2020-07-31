@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
     public List<Player> players;
 
     public static Player[] Players { get { return Instance.players.ToArray(); } }
+    public static PlayerController[] Controllers { get {
+            List<PlayerController> pcs = new List<PlayerController>();
+            foreach (Player p in Players)
+                pcs.Add(p.GetController());
+            return pcs.ToArray(); } }
 
     private void Awake()
     {

@@ -10,7 +10,6 @@ public class BoxSurprise : MonoBehaviour
     public GameObject pricePrefab, penaltyPrefab;
     public float roundTime = 6f;
     public int nRounds = 3;
-    public bool canMove;
 
     [Header("Ref")]
     public Transform[] boxes;
@@ -19,6 +18,14 @@ public class BoxSurprise : MonoBehaviour
     {
         Scoreboard.SetPlayerBoards(GameManager.Players);
         spawner.SpawnAllPlayers();
+        foreach (MoveController mc in GameManager.Controllers)
+        {
+            mc.positions = new Transform[4];
+            for (int i = 0; i < 4; i++)
+            {
+                mc.positions[i] = spawner.spawnPoints[i];
+            }
+        }
         StartGame();
     }
 
@@ -38,8 +45,8 @@ public class BoxSurprise : MonoBehaviour
         for (int i = 0; i < nRounds; i++)
         {
             //Start new round
+            ToggleMovement(true);
             timer = 0;
-            canMove = true;
             Scoreboard.SetClockColor(Color.green);
             while (timer < roundTime)
             {
@@ -48,7 +55,7 @@ public class BoxSurprise : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
             //Round over
-            canMove = true;
+            ToggleMovement(false);
             Scoreboard.SetClockColor(Color.yellow);
             Scoreboard.SetTime(1);
             yield return new WaitForSeconds(3);
@@ -57,6 +64,14 @@ public class BoxSurprise : MonoBehaviour
         Scoreboard.SetClockColor(Color.red);
         yield return new WaitForSeconds(3);
         GameManager.LoadScene("Lobby");
+    }
+
+    private void ToggleMovement(bool enabled)
+    {
+        foreach(Player p in GameManager.Players)
+        {
+            ((MoveController)p.GetController()).canWalk = enabled;
+        }
     }
 
 }

@@ -7,9 +7,12 @@ public class PlayerSpawner : MonoBehaviour
     public Transform[] spawnPoints;
     public PlayerController playerPrefab;
 
+    //public List<PlayerController> playerControllers = new List<PlayerController>();
+
     public void SpawnPlayer(Player player)
     {
         PlayerController pc = Instantiate(playerPrefab, spawnPoints[player.Index].position, Quaternion.identity).GetComponent<PlayerController>();
+        player.SetController(pc);
         pc.SetPlayer(player);
     }
 
