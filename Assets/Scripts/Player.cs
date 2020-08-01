@@ -14,8 +14,7 @@ public class Player : MonoBehaviour
     public Color color;
     public int points;
     public int Index { get { return GetComponent<PlayerInput>().user.index; } }
-
-    private PlayerController playerController;
+    public PlayerController Controller { get; private set; }
 
     private void Start()
     {
@@ -25,12 +24,7 @@ public class Player : MonoBehaviour
 
     public void SetController(PlayerController playerController)
     {
-        this.playerController = playerController;
-    }
-
-    public PlayerController GetController()
-    {
-        return playerController;
+        Controller = playerController;
     }
 
     public void Disconnect()

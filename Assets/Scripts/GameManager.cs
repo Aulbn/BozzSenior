@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static PlayerController[] Controllers { get {
             List<PlayerController> pcs = new List<PlayerController>();
             foreach (Player p in Players)
-                pcs.Add(p.GetController());
+                pcs.Add(p.Controller);
             return pcs.ToArray(); } }
 
     private void Awake()

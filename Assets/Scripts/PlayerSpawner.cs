@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    public Transform[] spawnPoints;
+    public PlayerPosition[] spawnPoints;
     public PlayerController playerPrefab;
 
     //public List<PlayerController> playerControllers = new List<PlayerController>();
@@ -14,6 +14,8 @@ public class PlayerSpawner : MonoBehaviour
         PlayerController pc = Instantiate(playerPrefab, spawnPoints[player.Index].position, Quaternion.identity).GetComponent<PlayerController>();
         player.SetController(pc);
         pc.SetPlayer(player);
+
+        spawnPoints[player.Index].MoveToPosition((MoveController)pc);
     }
 
     public void SpawnAllPlayers()

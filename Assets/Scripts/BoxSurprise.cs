@@ -20,7 +20,7 @@ public class BoxSurprise : MonoBehaviour
         spawner.SpawnAllPlayers();
         foreach (MoveController mc in GameManager.Controllers)
         {
-            mc.positions = new Transform[4];
+            mc.positions = new PlayerPosition[4];
             for (int i = 0; i < 4; i++)
             {
                 mc.positions[i] = spawner.spawnPoints[i];
@@ -70,7 +70,7 @@ public class BoxSurprise : MonoBehaviour
     {
         foreach(Player p in GameManager.Players)
         {
-            ((MoveController)p.GetController()).canWalk = enabled;
+            ((MoveController)p.Controller).canWalk = enabled;
         }
     }
 

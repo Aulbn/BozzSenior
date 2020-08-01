@@ -5,31 +5,45 @@ using UnityEngine.InputSystem;
 
 public class MoveController : PlayerController
 {
-    public Transform[] positions;
+    public PlayerPosition[] positions;
     public bool canWalk = false;
+
+    public enum TravelType
+    {
+        Teleport, Walk, Run, Jump
+    }
+
+    private PlayerPosition currentPosition;
 
     protected override void OnNorth(InputValue value)
     {
-        MoveToPosition(positions[0].position);
+        positions[0].MoveToPosition(this);
     }
     protected override void OnEast(InputValue value)
     {
-        MoveToPosition(positions[3].position);
+        positions[3].MoveToPosition(this);
 
     }
     protected override void OnSouth(InputValue value)
     {
-        MoveToPosition(positions[2].position);
+        positions[2].MoveToPosition(this);
 
     }
     protected override void OnWest(InputValue value)
     {
-        MoveToPosition(positions[1].position);
+        positions[1].MoveToPosition(this);
     }
 
-    private void MoveToPosition(Vector3 pos)
+    public void MoveToPosition(Vector3 pos, TravelType travelType)
     {
         if (canWalk)
             transform.position = pos;
+    }
+
+    public void SetPosition(PlayerPosition position)
+    {
+        if (currentPosition)
+            currentPosition.RemoveController(this);
+        currentPosition = position;
     }
 }
