@@ -31,10 +31,9 @@ public class PlayerPosition : MonoBehaviour
     public void MoveToPosition(MoveController controller)
     {
         AddController(controller);
-        Debug.Log("How many? " + controllers.Count);
         for (int i = 0; i < controllers.Count; i++)
         {
-            controller.MoveToPosition(GetMultiPosition(i), MoveController.TravelType.Teleport); //Move every controller on this position (PlayerPosition)
+            controllers[i].MoveToPosition(GetMultiPosition(i), MoveController.TravelType.Teleport); //Move every controller on this position (PlayerPosition)
         }
     }
 
@@ -51,7 +50,7 @@ public class PlayerPosition : MonoBehaviour
             case 2:
                 return pos = transform.position + new Vector3(-1, 0, 1) * centerOffset;
             case 3:
-               return pos = transform.position + new Vector3(-1, 0, -1) * centerOffset;
+                return pos = transform.position + new Vector3(-1, 0, -1) * centerOffset;
             default:
                 return pos;
         }

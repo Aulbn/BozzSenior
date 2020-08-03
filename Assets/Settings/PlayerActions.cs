@@ -250,7 +250,7 @@ public class @PlayerActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dedfac6d-b630-4214-abb1-fdb09d31eda3"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -305,7 +305,7 @@ public class @PlayerActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8bea7466-dbaf-4049-91cf-c18befca4603"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
