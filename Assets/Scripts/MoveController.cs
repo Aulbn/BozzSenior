@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class MoveController : PlayerController
 {
     public PlayerPosition[] positions;
-    public bool canWalk = false;
+    public bool canMove = false;
 
     public enum TravelType
     {
@@ -36,7 +36,7 @@ public class MoveController : PlayerController
 
     public void MoveToPosition(Vector3 pos, TravelType travelType)
     {
-        if (canWalk)
+        if (canMove)
             transform.position = pos;
     }
 

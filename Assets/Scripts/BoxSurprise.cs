@@ -70,7 +70,7 @@ public class BoxSurprise : MonoBehaviour
     {
         foreach(Player p in GameManager.Players)
         {
-            ((MoveController)p.Controller).canWalk = enabled;
+            ((MoveController)p.Controller).canMove = enabled;
         }
     }
 
