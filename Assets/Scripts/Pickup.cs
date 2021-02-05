@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    public int score;
+    public float damage;
+
     private Collider col;
 
     private void Awake()
@@ -15,7 +18,12 @@ public class Pickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Pick up!");
+    
+            PlayerController player = other.GetComponent<PlayerController>();
+            
+            if (score != 0)
+                Scoreboard.AddScore(player.Player.Index, score);
+
             Destroy(gameObject);
         }
     }

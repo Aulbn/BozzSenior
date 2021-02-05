@@ -10,7 +10,9 @@ public class Scoreboard : MonoBehaviour
 
     public Image clock;
     public Image[] playerBoards;
-    public TextMeshProUGUI[] playerScores;
+    public TextMeshProUGUI[] playerScoreTexts;
+    
+    private int[] playerScores;
 
     private void Awake()
     {
@@ -24,12 +26,18 @@ public class Scoreboard : MonoBehaviour
         {
             Instance.playerBoards[i].color = Color.white;
             Instance.playerBoards[i].gameObject.SetActive(false);
-            SetScore(i, 0, false);
+            SetScore(i, 0);
         }
     }
 
+    public void SetPlayerBoards()
+    {
+        Debug.Log(GameManager.Players.Length);
+        SetPlayerBoards(GameManager.Players);
+    }
     public static void SetPlayerBoards(Player[] players)
     {
+        Instance.playerScores = new int[players.Length];
         ClearBoards();
         foreach(Player p in players)
         {
@@ -52,9 +60,17 @@ public class Scoreboard : MonoBehaviour
         Instance.clock.color = color;
     }
 
-    public static void SetScore(int playerIndex, int score, bool transition)
+    public static void SetScore(int playerIndex, int score)
     {
-        Instance.playerScores[playerIndex].text = score.ToString();
+        if (Instance.playerScores.Length <= playerIndex) return;
+
+        Instance.playerScores[playerIndex] = score;
+        Instance.playerScoreTexts[playerIndex].text = score.ToString();
+    }
+
+    public static void AddScore(int playerIndex, int points)
+    {
+        SetScore(playerIndex, Instance.playerScores[playerIndex] + points);
     }
 
 

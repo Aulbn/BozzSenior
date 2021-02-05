@@ -5,32 +5,32 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
 {
-    private Player player;
+    public Player Player { get; private set; }
 
     public void SetPlayer(Player player)
     {
         OnDisable();
-        this.player = player;
+        Player = player;
         OnEnable();
     }
 
     private void OnEnable()
     {
-        if (!player) return;
-        player.onMove += OnMove;
-        player.onNorth += OnNorth;
-        player.onEast += OnEast;
-        player.onSouth += OnSouth;
-        player.onWest += OnWest;
+        if (!Player) return;
+        Player.onMove += OnMove;
+        Player.onNorth += OnNorth;
+        Player.onEast += OnEast;
+        Player.onSouth += OnSouth;
+        Player.onWest += OnWest;
     }
     private void OnDisable()
     {
-        if (!player) return;
-        player.onMove -= OnMove;
-        player.onNorth -= OnNorth;
-        player.onEast -= OnEast;
-        player.onSouth -= OnSouth;
-        player.onWest -= OnWest;
+        if (!Player) return;
+        Player.onMove -= OnMove;
+        Player.onNorth -= OnNorth;
+        Player.onEast -= OnEast;
+        Player.onSouth -= OnSouth;
+        Player.onWest -= OnWest;
     }
 
 

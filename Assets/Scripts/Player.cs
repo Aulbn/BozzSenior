@@ -12,8 +12,10 @@ public class Player : MonoBehaviour
     [Header("Stats")]
     public string playerName;
     public Color color;
-    public int points;
-    public int Index { get { return GetComponent<PlayerInput>().user.index; } }
+    public int score;
+    public int Index { get { return GetComponent<PlayerInput>().user.index; } } //change if it is called often
+    //public int Index { get { return index >= 0 ? index : (index = GetComponent<PlayerInput>().user.index); } }
+    //private int index = -1;
     public PlayerController Controller { get; private set; }
 
     private void Start()
