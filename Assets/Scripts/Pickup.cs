@@ -7,13 +7,6 @@ public class Pickup : MonoBehaviour
     public int score;
     public float damage;
 
-    private Collider col;
-
-    private void Awake()
-    {
-        col = GetComponent<Collider>();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
