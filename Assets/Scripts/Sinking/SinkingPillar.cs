@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SinkingPillar : MonoBehaviour
 {
-    public Collider trigger;
+    //public Collider trigger;
     public float sinkSpeedMultiplier;
     public float riseSpeed;
 

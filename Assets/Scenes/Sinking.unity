@@ -195,6 +195,86 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[0].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[0].g
+      value: 0.57000494
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[1].b
+      value: 0.43325615
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[1].g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[1].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[2].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[2].b
+      value: 0.5893965
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[2].g
+      value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[2].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[3].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[3].b
+      value: 0.99215686
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[3].g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: colors.Array.data[3].r
+      value: 0.5531562
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2838875aa38e7af498e5399f07379956, type: 3}
 --- !u!1 &141109503
@@ -404,6 +484,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2120594201162938228, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: input
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999528722047513570, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: input
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7428764674922954544, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -413,6 +503,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SinkingPillar_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428764674922954546, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7428764674922954550, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
         type: 3}
@@ -1326,6 +1421,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SinkingPillar_3
       objectReference: {fileID: 0}
+    - target: {fileID: 7428764674922954546, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7428764674922954550, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
         type: 3}
       propertyPath: m_RootOrder
@@ -1447,95 +1547,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1303694384}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1151251126
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1151251128}
-  - component: {fileID: 1151251127}
-  m_Layer: 0
-  m_Name: InnerGameLoop
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1151251127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151251126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d28fc9cd7b97ac4fbfd22bb642ff314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playOnStart: 0
-  gameEvents:
-  - events:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1151251127}
-          m_TargetAssemblyTypeName: GameLoop, Assembly-CSharp
-          m_MethodName: DebugPrint
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Round Start
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1456907245}
-          m_TargetAssemblyTypeName: UITimer, Assembly-CSharp
-          m_MethodName: StartTimer
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 10
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    waitTime: 10
-  - events:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1151251127}
-          m_TargetAssemblyTypeName: GameLoop, Assembly-CSharp
-          m_MethodName: DebugPrint
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Round End
-            m_BoolArgument: 0
-          m_CallState: 2
-    waitTime: 0
---- !u!4 &1151251128
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151251126}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1611898503}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1166238621
@@ -2042,18 +2053,6 @@ MonoBehaviour:
   - events:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1151251127}
-          m_TargetAssemblyTypeName: GameLoop, Assembly-CSharp
-          m_MethodName: StartLoop
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 1832410610}
           m_TargetAssemblyTypeName: Scoreboard, Assembly-CSharp
           m_MethodName: SetPlayerBoards
@@ -2066,39 +2065,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    waitTime: 10
-  - events:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1151251127}
-          m_TargetAssemblyTypeName: GameLoop, Assembly-CSharp
-          m_MethodName: StartLoop
-          m_Mode: 1
+        - m_Target: {fileID: 1456907245}
+          m_TargetAssemblyTypeName: UITimer, Assembly-CSharp
+          m_MethodName: StartTimer
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 60
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    waitTime: 10
-  - events:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1151251127}
-          m_TargetAssemblyTypeName: GameLoop, Assembly-CSharp
-          m_MethodName: StartLoop
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    waitTime: 10
+    waitTime: 60
   - events:
       m_PersistentCalls:
         m_Calls:
@@ -2141,8 +2120,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.9880805, y: 5.577692, z: 2.041369}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1151251128}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2432,6 +2410,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2120594201162938228, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: input
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999528722047513570, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: input
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999528722047513570, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: scheme
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7428764674922954544, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2441,6 +2434,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SinkingPillar_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428764674922954546, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7428764674922954550, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
         type: 3}
@@ -2682,6 +2680,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2120594201162938228, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: input
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120594201162938228, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: scheme
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999528722047513570, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: input
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7428764674922954544, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2691,6 +2704,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SinkingPillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428764674922954546, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7428764674922954550, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
         type: 3}

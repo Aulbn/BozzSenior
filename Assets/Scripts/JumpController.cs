@@ -10,8 +10,10 @@ public class JumpController : PlayerController
     public Transform[] positions;
     public float transitionTime = 1;
     public float jumpCooldown;
-
     public AnimationCurve jumpCurve, speedCurve;
+
+    [Space]
+    public MeshRenderer renderer;
 
     private Coroutine MoveCoroutine;
     private bool isMoving = false;
@@ -20,6 +22,11 @@ public class JumpController : PlayerController
     protected override void OnWest(InputValue value) {MoveToPosition(1);}
     protected override void OnNorth(InputValue value) {MoveToPosition(3);}
     protected override void OnEast(InputValue value) {MoveToPosition(2);}
+
+    private void Start()
+    {
+        renderer.material.SetColor("_BaseColor", Player.color);
+    }
 
     public void MoveToPosition(int positionIndex)
     {

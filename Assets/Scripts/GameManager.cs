@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public List<Player> players;
 
+    [Header("DEBUG")]
+    public Color[] colors;
+
     public static Player[] Players { get { return Instance.players.ToArray(); } }
     public static PlayerController[] Controllers { get {
             List<PlayerController> pcs = new List<PlayerController>();
@@ -24,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     public static void AddPlayer(Player player)
     {
+        player.color = Instance.colors[Instance.players.Count]; //DEBUG
         if (Instance.players == null) Instance.players = new List<Player>();
         Instance.players.Add(player);
     }
