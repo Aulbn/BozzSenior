@@ -24,7 +24,8 @@ public class SpriteDisplay : MonoBehaviour
 
     public void SetSprite()
     {
-        image.sprite = Resources.Load<Sprite>(GetSpritePath());
+        if (image != null)
+            image.sprite = Resources.Load<Sprite>(GetSpritePath());
     }
 
     private string GetSpritePath()

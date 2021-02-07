@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
 
     public static void AddPlayer(Player player)
     {
-        player.color = Instance.colors[Instance.players.Count]; //DEBUG
+        if (Instance.colors != null && Instance.colors.Length > 0) //DEBUG
+            player.color = Instance.colors[Instance.players.Count]; //DEBUG
         if (Instance.players == null) Instance.players = new List<Player>();
         Instance.players.Add(player);
     }
