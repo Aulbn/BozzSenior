@@ -21,16 +21,17 @@ public class PlayerSpawner : MonoBehaviour
 
     public void SpawnPlayer(Player player)
     {
-        PlayerController pc = Instantiate(playerPrefab, spawnPoints[player.Index].position, Quaternion.identity).GetComponent<PlayerController>();
+        PlayerController pc = Instantiate(playerPrefab, spawnPoints[Mathf.Clamp(player.Index, 0, spawnPoints.Length-1)].position, Quaternion.identity).GetComponent<PlayerController>();
         player.SetController(pc);
         pc.SetPlayer(player);
 
         //spawnPoints[player.Index].MoveToPosition((MoveController)pc);
-        pc.transform.position = spawnPoints[player.Index].position;
+        //pc.transform.position = spawnPoints[player.Index].position;
     }
 
     public void SpawnAllPlayers()
     {
+        Debug.Log(GameManager.Players.Length);
         foreach(Player p in GameManager.Players)
         {
             SpawnPlayer(p);
@@ -49,6 +50,6 @@ public class PlayerSpawner : MonoBehaviour
     {
         playerController.transform.Translate(Vector3.up * 10000);
         yield return new WaitForSecondsRealtime(respawnTime);
-        playerController.transform.position = spawnPoints[playerController.Player.Index].position;
+        playerController.transform.position = spawnPoints[Mathf.Clamp(playerController.Player.Index, 0, spawnPoints.Length-1)].position;
     }
 }

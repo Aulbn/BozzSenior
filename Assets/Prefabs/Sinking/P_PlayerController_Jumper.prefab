@@ -117,7 +117,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   transitionTime: 0.4
-  jumpCooldown: 1
+  jumpCooldown: 0.3
   jumpCurve:
     serializedVersion: 2
     m_Curve:

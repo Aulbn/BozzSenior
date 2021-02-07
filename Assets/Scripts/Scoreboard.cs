@@ -8,7 +8,6 @@ public class Scoreboard : MonoBehaviour
 {
     private static Scoreboard Instance;
 
-    public Image clock;
     public Image[] playerBoards;
     public TextMeshProUGUI[] playerScoreTexts;
     
@@ -32,7 +31,7 @@ public class Scoreboard : MonoBehaviour
 
     public void SetPlayerBoards()
     {
-        Debug.Log(GameManager.Players.Length);
+        //Debug.Log(GameManager.Players.Length);
         SetPlayerBoards(GameManager.Players);
     }
     public static void SetPlayerBoards(Player[] players)
@@ -49,15 +48,6 @@ public class Scoreboard : MonoBehaviour
     {
         Instance.playerBoards[player.Index].gameObject.SetActive(true);
         Instance.playerBoards[player.Index].color = player.color;
-    }
-
-    public static void SetTime (float normalized)
-    {
-        Instance.clock.fillAmount = normalized;
-    }
-    public static void SetClockColor(Color color)
-    {
-        Instance.clock.color = color;
     }
 
     public static void SetScore(int playerIndex, int score)

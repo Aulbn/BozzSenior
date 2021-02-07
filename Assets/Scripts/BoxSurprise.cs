@@ -39,7 +39,7 @@ public class BoxSurprise : MonoBehaviour
         float timer;
 
         //Intro
-        Scoreboard.SetClockColor(Color.yellow);
+        //Scoreboard.SetClockColor(Color.yellow);
         yield return new WaitForSeconds(3);
 
         for (int i = 0; i < nRounds; i++)
@@ -47,21 +47,21 @@ public class BoxSurprise : MonoBehaviour
             //Start new round
             ToggleMovement(true);
             timer = 0;
-            Scoreboard.SetClockColor(Color.green);
+            //Scoreboard.SetClockColor(Color.green);
             while (timer < roundTime)
             {
                 timer += Time.deltaTime;
-                Scoreboard.SetTime(1 - (timer / roundTime));
+                //Scoreboard.SetTime(1 - (timer / roundTime));
                 yield return new WaitForEndOfFrame();
             }
             //Round over
             ToggleMovement(false);
-            Scoreboard.SetClockColor(Color.yellow);
-            Scoreboard.SetTime(1);
+            //Scoreboard.SetClockColor(Color.yellow);
+            //Scoreboard.SetTime(1);
             yield return new WaitForSeconds(3);
         }
         //Game over
-        Scoreboard.SetClockColor(Color.red);
+        //Scoreboard.SetClockColor(Color.red);
         yield return new WaitForSeconds(3);
         GameManager.LoadScene("Lobby");
     }
