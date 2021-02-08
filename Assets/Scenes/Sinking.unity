@@ -494,6 +494,11 @@ PrefabInstance:
       propertyPath: input
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5999528722047513570, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: scheme
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7428764674922954544, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1411,6 +1416,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5999528722047513570, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: scheme
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7428764674922954544, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1903,7 +1913,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 119.977295}
+  m_AnchoredPosition: {x: 0, y: 119.97705}
   m_SizeDelta: {x: -1680.0454, y: 239.95459}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1456907243
@@ -2694,6 +2704,11 @@ PrefabInstance:
         type: 3}
       propertyPath: input
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999528722047513570, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
+        type: 3}
+      propertyPath: scheme
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7428764674922954544, guid: bac9b71c1b1a1954cb851b916e9ddaeb,
         type: 3}

@@ -15,7 +15,7 @@ public class SpriteDisplay : MonoBehaviour
     }
     public InputSprite input;
     public Scheme scheme;
-    public Image image;
+    public Image image, background;
 
     private void Start()
     {
@@ -25,7 +25,13 @@ public class SpriteDisplay : MonoBehaviour
     public void SetSprite()
     {
         if (image != null)
-            image.sprite = Resources.Load<Sprite>(GetSpritePath());
+        {
+            SpriteCollection.SpriteVariant variant = GetSpriteVariant(Resources.Load<SpriteCollection>(GetSpritePath()));
+            image.sprite = variant.sprite;
+            image.color = variant.color;
+            if (background != null)
+                background.sprite = variant.backgroundSprite;
+        }
     }
 
     private string GetSpritePath()
@@ -51,6 +57,20 @@ public class SpriteDisplay : MonoBehaviour
                 break;
         }
 
-        return path + "/" + (int)scheme;
+        return path;
     }
+
+    private SpriteCollection.SpriteVariant GetSpriteVariant(SpriteCollection collection)
+    {
+        switch (scheme)
+        {
+            case Scheme.Playstation:
+                return collection.sv_playstation;
+            case Scheme.Xbox:
+                return collection.sv_xbox;
+            default:
+                return collection.sv_pc;
+        }
+    }
+
 }
