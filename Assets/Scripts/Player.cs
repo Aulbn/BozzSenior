@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public string playerName;
     public Color color;
     public int score;
+    public int oldScore { get; private set; }
     public int Index { get { return GetComponent<PlayerInput>().user.index; } } //change if it is called often
     //public int Index { get { return index >= 0 ? index : (index = GetComponent<PlayerInput>().user.index); } }
     //private int index = -1;
@@ -34,6 +35,17 @@ public class Player : MonoBehaviour
         GameManager.RemovePlayer(this);
         StartCoroutine(DelayedDestruction());
     }
+
+    public void AddScore(int score)
+    {
+        oldScore = score;
+        this.score += score;
+    }
+    public void SetScore(int score)
+    {
+        this.score += score;
+    }
+
 
     private IEnumerator DelayedDestruction()
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +8,29 @@ public class UITimer : MonoBehaviour
 {
     public Image clock;
 
+    public bool isRunning { get; private set; }
+
     public void StartTimer(float time)
     {
-        StopAllCoroutines();
-        StartCoroutine(IETimer(time));
+        StartTimer(time, () => { });
     }
 
-    private IEnumerator IETimer(float time)
+    public void StartTimer(float time, Action onFinish)
     {
+        StopTimer();
+        StartCoroutine(IETimer(time, onFinish));
+    }
+
+    public void StopTimer()
+    {
+        StopAllCoroutines();
+        isRunning = false;
+        clock.fillAmount = 0;
+    }
+
+private IEnumerator IETimer(float time, Action onFinish)
+    {
+        isRunning = true;
         float currentTime = 0;
 
         while (currentTime < time)
@@ -24,6 +40,8 @@ public class UITimer : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
+        isRunning = false;
+        onFinish();
     }
 
 }

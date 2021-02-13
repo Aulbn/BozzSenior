@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sv_playstation:
     sprite: {fileID: 21300000, guid: b5b2a6d9f6c1d384f8588cbcb2751f60, type: 3}
-    color: {r: 1, g: 0.19607843, b: 0.19607843, a: 1}
+    backgroundSprite: {fileID: 21300000, guid: 777b0c79c6694fb4fa0baa81f55f7636, type: 3}
+    color: {r: 0.6862745, g: 0.47058824, b: 0.8235294, a: 1}
   sv_xbox:
     sprite: {fileID: 21300000, guid: bec8405756552f2438a9b5de322adbf6, type: 3}
+    backgroundSprite: {fileID: 21300000, guid: 777b0c79c6694fb4fa0baa81f55f7636, type: 3}
     color: {r: 1, g: 0.19607843, b: 0.19607843, a: 1}
   sv_pc:
     sprite: {fileID: 0}
+    backgroundSprite: {fileID: 0}
     color: {r: 0, g: 0.50980395, b: 0.9411765, a: 1}

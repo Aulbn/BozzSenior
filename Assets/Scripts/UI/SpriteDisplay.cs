@@ -33,6 +33,11 @@ public class SpriteDisplay : MonoBehaviour
                 background.sprite = variant.backgroundSprite;
         }
     }
+    public void SetSprite(InputSprite input)
+    {
+        this.input = input;
+        SetSprite();
+    }
 
     private string GetSpritePath()
     {

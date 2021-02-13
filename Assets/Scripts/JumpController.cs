@@ -13,7 +13,7 @@ public class JumpController : PlayerController
     public AnimationCurve jumpCurve, speedCurve;
 
     [Space]
-    public MeshRenderer renderer;
+    public MeshRenderer _renderer;
 
     private Coroutine MoveCoroutine;
     private bool isMoving = false;
@@ -25,7 +25,7 @@ public class JumpController : PlayerController
 
     private void Start()
     {
-        renderer.material.SetColor("_BaseColor", Player.color);
+        _renderer.material.SetColor("_BaseColor", Player.color);
     }
 
     public void MoveToPosition(int positionIndex)
