@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public abstract class PlayerController : MonoBehaviour
 {
     public Player Player { get; private set; }
+    public bool HasControl { get { return inputLocks == 0; } }
+    private int inputLocks;
 
     public void SetPlayer(Player player)
     {
@@ -33,10 +35,26 @@ public abstract class PlayerController : MonoBehaviour
         Player.onWest -= OnWest;
     }
 
-
     protected virtual void OnMove(InputValue value) { }
     protected virtual void OnNorth(InputValue value) { }
     protected virtual void OnEast(InputValue value) { }
     protected virtual void OnSouth(InputValue value) { }
     protected virtual void OnWest(InputValue value) { }
+
+    public void AddInputLock()
+    {
+        if (!Player) return;
+
+        inputLocks++;
+        if (inputLocks > 0)
+            OnDisable();
+    }
+    public void RemoveInputLock()
+    {
+        if (!Player) return;
+
+        inputLocks = Mathf.Clamp(--inputLocks, 0, int.MaxValue);
+        if (inputLocks < 1)
+            OnEnable();
+    }
 }

@@ -15,7 +15,7 @@ public class Pickup : MonoBehaviour
             PlayerController player = other.GetComponent<PlayerController>();
             
             if (score != 0)
-                Scoreboard.AddScore(player.Player.Index, score);
+                Scoreboard.AddScore(player.Player, score);
 
             Destroy(gameObject);
         }

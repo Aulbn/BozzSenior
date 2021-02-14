@@ -18,8 +18,12 @@ public class PlayerScoreCard : PlayerController
     {
         SetPlayer(player);
         background.color = player.color;
-        scoreText.text = player.score.ToString();
+        scoreText.text = player.oldScore.ToString(); //Show old score first
+        //Debug.Log( "OLD SCORE: " + player.oldScore);
         nameText.text = player.playerName;
+
+        toggleSwitch.gameObject.SetActive(false);
+        AddInputLock();
     }
 
     protected override void OnSouth(InputValue value)
@@ -36,6 +40,12 @@ public class PlayerScoreCard : PlayerController
     {
         this.isReady = isReady;
         toggleSwitch.Toggle(isReady, .15f);
+    }
+
+    public void ShowToggleSwitch()
+    {
+        toggleSwitch.gameObject.SetActive(true);
+        RemoveInputLock();
     }
 
 }

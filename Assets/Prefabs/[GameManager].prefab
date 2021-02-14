@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
+  currentLevel: 0
+  midboardSceneName: Midboard
+  levelQueue: []
+  colors: []

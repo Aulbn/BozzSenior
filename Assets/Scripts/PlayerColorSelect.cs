@@ -78,7 +78,8 @@ public class PlayerColorSelect : MonoBehaviour
         }
         else
         {
-            GameManager.LoadScene("Level1");
+            //GameManager.LoadScene("Level1");
+            GameManager.LoadNextLevel();
             Debug.Log("Start game");
         }
     }

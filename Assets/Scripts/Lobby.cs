@@ -13,7 +13,6 @@ public class Lobby : MonoBehaviour
 
     private static List<PlayerColorSelect> ColorPickers;
 
-
     private void Awake()
     {
         ColorPickers = new List<PlayerColorSelect>();

@@ -38,11 +38,7 @@ public class Player : MonoBehaviour
 
     public void AddScore(int score)
     {
-        oldScore = score;
-        this.score += score;
-    }
-    public void SetScore(int score)
-    {
+        oldScore = this.score;
         this.score += score;
     }
 

@@ -17,14 +17,34 @@ public class MidBoard : MonoBehaviour
 
     public void Start()
     {
-        SetPlayerCards();
-        OrderCards();
+        StartCoroutine(IEIntro());
     }
 
     private void Update()
     {
         CheckPlayerReady();
+    }
 
+    private IEnumerator IEIntro()
+    {
+        SetPlayerCards();
+        OrderCards();
+        
+        yield return new WaitForSecondsRealtime(3);
+
+        foreach (PlayerScoreCard card in playerCards)//Update score
+        {
+            if (!card.Player) continue;
+            card.scoreText.text = card.Player.score.ToString();
+        }
+        OrderCards();
+
+        yield return new WaitForSecondsRealtime(3);
+        
+        foreach(PlayerScoreCard card in playerCards)//Unlock ready toggle switch
+        {
+            card.ShowToggleSwitch();
+        }
     }
 
     private void CheckPlayerReady()
@@ -44,7 +64,7 @@ public class MidBoard : MonoBehaviour
             if (!timer.isRunning) //Start start-coroutine
             {
                 countdownModule.SetActive(true);
-                timer.StartTimer(startGameTime, () => { Debug.Log("START GAME"); }); //This is where we start next game
+                timer.StartTimer(startGameTime, () => { Debug.Log("START GAME"); GameManager.LoadNextLevel(); }); //This is where we start next game
             }
         }
         else
@@ -55,7 +75,7 @@ public class MidBoard : MonoBehaviour
         }
     }
 
-    public void SetPlayerCards()
+    private void SetPlayerCards()
     {
         for (int i = 0; i < playerCards.Length; i++)
         {
@@ -64,7 +84,16 @@ public class MidBoard : MonoBehaviour
         }
     }
 
-    public void OrderCards()
+    private void UpdateCardScore()
+    {
+        for (int i = 0; i < playerCards.Length; i++)
+        {
+            if (!playerCards[i].Player) continue;
+            playerCards[i].scoreText.text = playerCards[i].Player.score.ToString();
+        }
+    }
+
+    private void OrderCards()
     {
         PlayerScoreCard[] cardsOrdered = playerCards.OrderByDescending(card => int.Parse(card.scoreText.text)).ToArray(); //Order
 

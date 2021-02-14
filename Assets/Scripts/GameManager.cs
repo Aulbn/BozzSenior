@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public List<Player> players;
+    [Header("Scene Management")]
+    public int currentLevel;
+    public string midboardSceneName;
+    public LevelObject[] levelQueue; //Kanske ska vara queue sen, men vill se i inpectorn nu
 
     [Header("DEBUG")]
     public Color[] colors;
@@ -55,4 +59,28 @@ public class GameManager : MonoBehaviour
         }
         LoadingScreen.Hide();
     }
+
+    public static void LoadNextLevel()
+    {
+        Instance.currentLevel++;
+        int adjustedLevelIndex = Instance.currentLevel / 2;
+
+        if (Instance.currentLevel % 2 == 0)
+        {
+            //Load midboard
+            LoadScene(Instance.midboardSceneName);
+        }
+        else
+        {//Load level
+            Debug.Log("Current level index: " + Instance.currentLevel);
+            if (adjustedLevelIndex < Instance.levelQueue.Length)
+                LoadScene(Instance.levelQueue[adjustedLevelIndex].sceneName);
+            else
+            {
+                //Start last scene
+                LoadScene("Lobby");
+            }
+        }
+    }
+
 }

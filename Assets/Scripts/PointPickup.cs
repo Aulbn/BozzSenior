@@ -19,7 +19,7 @@ public class PointPickup : MonoBehaviour
         {
             foreach(Player p in pointPlayers)
             {
-                Scoreboard.AddScore(p.Index, points / pointPlayers.Count);
+                Scoreboard.AddScore(p, points / pointPlayers.Count);
             }
             Destroy(gameObject);
         }
@@ -36,7 +36,7 @@ public class PointPickup : MonoBehaviour
                 switch (pointType)
                 {
                     case PointType.Normal:
-                        Scoreboard.AddScore(player.Player.Index, points);
+                        Scoreboard.AddScore(player.Player, points);
                         Destroy(gameObject);
                         break;
                     case PointType.Split:

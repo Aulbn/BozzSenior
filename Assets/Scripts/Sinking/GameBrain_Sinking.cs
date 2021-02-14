@@ -21,4 +21,10 @@ public class GameBrain_Sinking : MonoBehaviour
             mc.positions = positions;
         }
     }
+
+    public void LoadNextLevel()
+    {
+        GameManager.LoadNextLevel();
+    }
+
 }
