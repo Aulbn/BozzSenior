@@ -8,15 +8,20 @@ using System.Linq;
 
 public class MidBoard : MonoBehaviour
 {
+    [Header("Score Cards")]
+    public List<PlayerScoreCard> playerCards;
+    public GameObject cardPrefab;
+    public Transform content;
+    [Header("Timer")]
     public float startGameTime;
-    public PlayerScoreCard[] playerCards;
     public UITimer timer;
     public GameObject countdownModule;
-
+    
     private bool isAllReady = false;
 
     public void Start()
     {
+        CreateCards();
         StartCoroutine(IEIntro());
     }
 
@@ -25,23 +30,36 @@ public class MidBoard : MonoBehaviour
         CheckPlayerReady();
     }
 
+    private void CreateCards()
+    {
+        foreach (Transform child in content)
+        {
+            Destroy(child.gameObject);
+        }
+        playerCards.Clear();
+
+        foreach (Player player in GameManager.Players)
+        {
+            PlayerScoreCard card = Instantiate(cardPrefab, content).GetComponent<PlayerScoreCard>();
+            card.Init(player);
+            playerCards.Add(card);
+        }
+    }
+
     private IEnumerator IEIntro()
     {
-        SetPlayerCards();
-        OrderCards();
-        
-        yield return new WaitForSecondsRealtime(3);
+        OrderCards(true);
+        yield return new WaitForSeconds(3);
 
-        foreach (PlayerScoreCard card in playerCards)//Update score
-        {
-            if (!card.Player) continue;
-            card.scoreText.text = card.Player.score.ToString();
-        }
-        OrderCards();
+        UpdateCardScore();
+        yield return new WaitForSeconds(0.5f);
 
-        yield return new WaitForSecondsRealtime(3);
-        
-        foreach(PlayerScoreCard card in playerCards)//Unlock ready toggle switch
+        foreach (PlayerScoreCard card in playerCards)
+            card.ToggleSmoothFollow(true);
+        OrderCards(false);
+        yield return new WaitForSeconds(1);
+
+        foreach (PlayerScoreCard card in playerCards)//Unlock ready toggle switch
         {
             card.ShowToggleSwitch();
         }
@@ -52,7 +70,7 @@ public class MidBoard : MonoBehaviour
         isAllReady = true;
         foreach (PlayerScoreCard card in playerCards)
         {
-            if (!card.isReady && card.gameObject.activeSelf)
+            if (!card.isReady)
             {
                 isAllReady = false;
                 break;
@@ -74,32 +92,27 @@ public class MidBoard : MonoBehaviour
             timer.StopTimer();
         }
     }
-
-    private void SetPlayerCards()
-    {
-        for (int i = 0; i < playerCards.Length; i++)
-        {
-            if (i >= GameManager.Players.Length) { playerCards[i].gameObject.SetActive(false);  continue; } //HIde if player does not exist
-            playerCards[i].Init(GameManager.Players[i]);
-        }
-    }
-
     private void UpdateCardScore()
     {
-        for (int i = 0; i < playerCards.Length; i++)
+        foreach (PlayerScoreCard card in playerCards)
         {
-            if (!playerCards[i].Player) continue;
-            playerCards[i].scoreText.text = playerCards[i].Player.score.ToString();
+            card.AddPoints(card.Player.score, .1f);
         }
     }
 
-    private void OrderCards()
+    private void OrderCards(bool oldScore)
     {
-        PlayerScoreCard[] cardsOrdered = playerCards.OrderByDescending(card => int.Parse(card.scoreText.text)).ToArray(); //Order
+        //PlayerScoreCard[] cardsOrdered = playerCards.OrderByDescending(card => int.Parse(card.scoreText.text)).ToArray(); //Order
+        PlayerScoreCard[] cardsOrdered = playerCards.OrderByDescending(card => oldScore ? card.Player.oldScore : card.Player.score).ToArray(); //Order
 
-        for (int i = 0; i < playerCards.Length; i++) //Move to correct order (we can animate this instead)
+        for (int i = 0; i < playerCards.Count; i++) //Move to correct order (we can animate this instead)
         {
             cardsOrdered[i].transform.SetSiblingIndex(i);
         }
     }
+
+    //private PlayerScoreCard[] GetOrderedCards()
+    //{
+    //    return playerCards.OrderByDescending(card => int.Parse(card.scoreText.text)).ToArray();
+    //}
 }

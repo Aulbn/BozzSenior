@@ -105,7 +105,7 @@ public class Scoreboard : MonoBehaviour
 
             points++;
 
-            Debug.Log(points + " points for: " + orderedBoards[i].score);
+            //Debug.Log(points + " points for: " + orderedBoards[i].score);
             orderedBoards[i].player.AddScore(points);
         }
     }

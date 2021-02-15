@@ -49,15 +49,17 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator IESceneLoad(string sceneName)
     {
-        AsyncOperation ao = SceneManager.LoadSceneAsync(sceneName);
+        //LoadingScreen.Show();
+        yield return StartCoroutine(LoadingScreen.IEToggle(true));
 
-        LoadingScreen.Show();
+        AsyncOperation ao = SceneManager.LoadSceneAsync(sceneName);
         while (!ao.isDone)
         {
             LoadingScreen.SetProgress(ao.progress);
             yield return null;
         }
-        LoadingScreen.Hide();
+        //LoadingScreen.Hide();
+        yield return StartCoroutine(LoadingScreen.IEToggle(false));
     }
 
     public static void LoadNextLevel()
