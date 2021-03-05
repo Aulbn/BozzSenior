@@ -18,6 +18,7 @@ public class Scoreboard : MonoBehaviour
         public int score { get; private set; }
         public Player player;
         public GameObject gameObject { get { return board.gameObject; } }
+        public RectTransform rectTransform { get { return (RectTransform)board.transform; } }
 
         public void Init(Player player)
         {
@@ -39,6 +40,10 @@ public class Scoreboard : MonoBehaviour
         public void AddScore(int score)
         {
             SetScore(this.score + score);
+        }
+        public override String ToString()
+        {
+            return player.playerName + ": " + score;
         }
     }
 
@@ -88,25 +93,49 @@ public class Scoreboard : MonoBehaviour
             if (Instance.playerBoards[i].player == player)
             {
                 Instance.playerBoards[i].AddScore(points);
+                Tweener.Pulse(Instance, Instance.playerBoards[i].rectTransform, 1.2f, .2f, () => { });
                 break;
             }
         }
     }
 
+    public void CelebrateLeaders()
+    {
+        foreach (PlayerBoard board in GetLeaders())
+        {
+            Tweener.Pulse(this, board.rectTransform, 2, 3f, () => { });
+        }
+    }
+
+    public PlayerBoard[] GetLeaders()
+    {
+        PlayerBoard[] orderedBoards = playerBoards.OrderByDescending(board => board.score).ToArray();
+        int nLeaders = 1;
+        for (int i = 1; i < orderedBoards.Length; i++)
+        {
+            if (orderedBoards[i].score != orderedBoards[i - 1].score)
+                break;
+            nLeaders++;
+        }
+        PlayerBoard[] newArray = new PlayerBoard[nLeaders];
+        Array.Copy(orderedBoards, newArray, nLeaders);
+        return newArray;
+    }
+
     public void CalculateWinningPoints()
     {
-        PlayerBoard[] orderedBoards = playerBoards.OrderBy(board => board.score).ToArray();
+        PlayerBoard[] orderedBoards = playerBoards.OrderByDescending(board => board.score).ToArray();
 
-        int points = 0;
+        int points = GameManager.Players.Length;
+        int prevScore = orderedBoards[0].score;
 
         for (int i = 0; i < orderedBoards.Length; i++)
         {
             if (!orderedBoards[i].player) continue;
-
-            points++;
-
-            //Debug.Log(points + " points for: " + orderedBoards[i].score);
+            if (orderedBoards[i].score != prevScore)
+                points--;
             orderedBoards[i].player.AddScore(points);
+            prevScore = orderedBoards[i].score;
         }
     }
 

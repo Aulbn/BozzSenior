@@ -44,7 +44,7 @@ public class GameLoop : MonoBehaviour
         foreach (GameLoopItem gameEvent in gameEvents)
         {
             gameEvent.events.Invoke();
-            yield return new WaitForSeconds(gameEvent.waitTime);
+            yield return new WaitForSecondsRealtime(gameEvent.waitTime);
         }
     }
 

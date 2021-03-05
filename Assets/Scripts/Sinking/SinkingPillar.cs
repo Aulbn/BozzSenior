@@ -8,6 +8,8 @@ public class SinkingPillar : MonoBehaviour
     public float sinkSpeedMultiplier;
     public float riseSpeed;
 
+    public bool isActive = true;
+
     private int nPlayers;
     private float originHeight;
 
@@ -18,6 +20,8 @@ public class SinkingPillar : MonoBehaviour
 
     void Update()
     {
+        if (!isActive) return;
+
         if (nPlayers > 0)//Sink
         {
             transform.position -= Vector3.up * sinkSpeedMultiplier * nPlayers * Time.deltaTime;

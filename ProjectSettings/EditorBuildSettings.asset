@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Lobby.unity
+    path: Assets/Scenes/Official/Lobby.unity
     guid: 14232915a72dcf94bb05b678d1e27a7c
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: e591331f3d181124088a506d2f3a9e37
   - enabled: 1
-    path: Assets/Scenes/Sinking.unity
+    path: Assets/Scenes/Official/Sinking.unity
     guid: 33aaac8c8b4eb484bb266fdfb1233216
   - enabled: 1
-    path: Assets/Scenes/Midboard.unity
+    path: Assets/Scenes/Official/Midboard.unity
     guid: 22a34883061a9e948b3bc7cc61d1fbce
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 415e3ef17a64bdf4e83b75461a40cf64,

@@ -34,6 +34,30 @@ public class Tweener : MonoBehaviour
         onDone();
     }
 
+    public static void Pulse(MonoBehaviour owner, RectTransform rectTransform, float scaleMultiplier, float transitionTime, Action onDone)
+    {
+        owner.StartCoroutine(IEPulse(rectTransform, scaleMultiplier, transitionTime, onDone));
+    }
+    private static IEnumerator IEPulse(RectTransform rectTransform, float scaleMultiplier, float transitionTime, Action onDone)
+    {
+        Vector2 startScale = rectTransform.localScale;
+        Vector2 biggestScale = startScale * scaleMultiplier;
+        float time = 0;
+        bool halfway = false;
+
+        while (time < transitionTime)
+        {
+            time += Time.deltaTime;
+
+            halfway = time / transitionTime > 0.5f;
+
+            rectTransform.localScale = Vector2.Lerp(halfway ? biggestScale : startScale, halfway ? startScale : biggestScale, time / transitionTime);
+            yield return new WaitForEndOfFrame();
+        }
+        onDone();
+    }
+
+
     public static float InvertFloat(float value, float max)
     {
         return max - value;

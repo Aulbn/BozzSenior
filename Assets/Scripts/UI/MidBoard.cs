@@ -96,7 +96,7 @@ public class MidBoard : MonoBehaviour
     {
         foreach (PlayerScoreCard card in playerCards)
         {
-            card.AddPoints(card.Player.score, .1f);
+            card.AddPoints(card.Player.score - card.Player.oldScore, .1f);
         }
     }
 
