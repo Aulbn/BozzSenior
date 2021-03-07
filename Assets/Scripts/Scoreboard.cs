@@ -41,7 +41,7 @@ public class Scoreboard : MonoBehaviour
         {
             SetScore(this.score + score);
         }
-        public override String ToString()
+        public override string ToString()
         {
             return player.playerName + ": " + score;
         }
@@ -94,6 +94,10 @@ public class Scoreboard : MonoBehaviour
             {
                 Instance.playerBoards[i].AddScore(points);
                 Tweener.Pulse(Instance, Instance.playerBoards[i].rectTransform, 1.2f, .2f, () => { });
+                //Color originalColor = Instance.playerBoards[i].board.color;
+                //Tweener.CrossFadeColor(Instance, Instance.playerBoards[i].board, Color.white, .1f, () => { 
+                //    Tweener.CrossFadeColor(Instance, Instance.playerBoards[i].board, originalColor, .1f, () => { });
+                //}); //If stuck at white it means it probably picked multiple points at the same time. Known bug, fix later
                 break;
             }
         }

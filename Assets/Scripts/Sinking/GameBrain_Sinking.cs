@@ -5,15 +5,10 @@ using UnityEngine;
 public class GameBrain_Sinking : MonoBehaviour
 {
     public PlayerSpawner spawner;
-    public Transform[] positions;
+    public PlayerPosition[] positions;
 
     public SinkingPillar[] pillars;
     public ObjectSpawner[] objectSpawners;
-
-    public void Start()
-    {
-
-    }
 
     public void Init()
     {
@@ -36,6 +31,17 @@ public class GameBrain_Sinking : MonoBehaviour
             pillar.isActive = isOn;
         foreach (ObjectSpawner spawner in objectSpawners)
             spawner.isSpawning = isOn;
+    }
+
+    public void TogglePlayerMovement(bool enableMovement)
+    {
+        foreach(PlayerController c in GameManager.Controllers)
+        {
+            if (enableMovement)
+                c.RemoveInputLock();
+            else
+                c.AddInputLock();
+        }
     }
 
 }

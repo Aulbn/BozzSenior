@@ -17,21 +17,21 @@ public class MoveController : PlayerController
 
     protected override void OnNorth(InputValue value)
     {
-        positions[3].MoveToPosition(this);
+        //positions[3].MoveToPosition(this);
     }
     protected override void OnEast(InputValue value)
     {
-        positions[2].MoveToPosition(this);
+        //positions[2].MoveToPosition(this);
 
     }
     protected override void OnSouth(InputValue value)
     {
-        positions[0].MoveToPosition(this);
+        //positions[0].MoveToPosition(this);
 
     }
     protected override void OnWest(InputValue value)
     {
-        positions[1].MoveToPosition(this);
+        //positions[1].MoveToPosition(this);
     }
 
     public void MoveToPosition(Vector3 pos, TravelType travelType)
@@ -42,8 +42,8 @@ public class MoveController : PlayerController
 
     public void SetPosition(PlayerPosition position)
     {
-        if (currentPosition)
-            currentPosition.RemoveController(this);
+        //if (currentPosition)
+        //    currentPosition.LeavePosition(this);
         currentPosition = position;
     }
 }

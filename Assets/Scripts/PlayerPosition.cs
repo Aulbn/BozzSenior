@@ -13,46 +13,108 @@ public class PlayerPosition : MonoBehaviour
     public float centerOffset = 0.5f;
 
     public Vector3 position { get { return transform.position; } }
-    private List<MoveController> controllers = new List<MoveController>();
+    private PlayerController[] reservations = new PlayerController[4];
 
-    public void AddController(MoveController controller)
+    private static List<PlayerPosition> AllPositions;
+
+    private void Awake()
     {
-        if (!controllers.Contains(controller))
-        {
-            controller.SetPosition(this);
-            controllers.Add(controller);
-        }
-    }
-    public void RemoveController(MoveController controller)
-    {
-        controllers.Remove(controller);
+        if (AllPositions == null) AllPositions = new List<PlayerPosition>();
+        AllPositions.Add(this);
     }
 
-    public void MoveToPosition(MoveController controller)
+    public Vector3 GetMultiPosition(PlayerController controller)
     {
-        AddController(controller);
-        for (int i = 0; i < controllers.Count; i++)
+        int posIndex;
+        if (!Contains(controller)) //Don't have this player
         {
-            controllers[i].MoveToPosition(GetMultiPosition(i), MoveController.TravelType.Teleport); //Move every controller on this position (PlayerPosition)
+            foreach (PlayerPosition p in AllPositions) //Remove from other position
+            {
+                if (p == this) continue;
+                if (p.CancelReservation(controller))
+                    break;
+            }
+
+            //Add player and return a free position
+            posIndex = GetFreePositionIndex();
+            reservations[posIndex] = controller;
         }
+        else //Already have this player
+        {
+            posIndex = GetPlayerIndex(controller);
+        }
+
+        return GetMultiPosition(posIndex);        
+    }
+    public bool CancelReservation(PlayerController controller)
+    {
+        int playerIndex = GetPlayerIndex(controller);
+        if (playerIndex > -1) //Exists
+        {
+            reservations[playerIndex] = null;
+            return true;
+        }
+        return false;
+    }
+
+    private int GetPlayerIndex(PlayerController controller)
+    {
+        for (int i = 0; i < reservations.Length; i++)
+        {
+            if (reservations[i] == controller)
+                return i;
+        }
+        return -1;
+    }
+
+    public bool Contains(PlayerController controller)
+    {
+        return GetPlayerIndex(controller) > -1;
+    }
+
+    //public void MoveToPosition(MoveController controller)
+    //{
+    //    AddController(controller);
+    //    for (int i = 0; i < controllers.Count; i++)
+    //    {
+    //        controllers[i].MoveToPosition(GetMultiPosition(i), MoveController.TravelType.Teleport); //Move every controller on this position (PlayerPosition)
+    //    }
+    //}
+
+    //public void AddReservation()
+    //{
+
+    //}
+    //public void RemoveReservation()
+    //{
+
+    //}
+
+    private int GetFreePositionIndex()
+    {
+        for (int i = 0; i < reservations.Length; i++)
+        {
+            if (reservations[i] == null)
+                return i;
+        }
+
+        return -1; //Out of bounds, should never be reached
     }
 
     public Vector3 GetMultiPosition(int index)
     {
-        Vector3 pos = transform.position;
-
         switch (index)
         {
             case 0:
-                return pos = transform.position + new Vector3(1, 0, 1) * centerOffset;
+                return transform.position + new Vector3(0, 0, 1) * centerOffset;
             case 1:
-                return pos = transform.position + new Vector3(1, 0, -1) * centerOffset;
+                return transform.position + new Vector3(1, 0, 0) * centerOffset;
             case 2:
-                return pos = transform.position + new Vector3(-1, 0, 1) * centerOffset;
+                return transform.position + new Vector3(-1, 0, 0) * centerOffset;
             case 3:
-                return pos = transform.position + new Vector3(-1, 0, -1) * centerOffset;
+                return transform.position + new Vector3(0, 0, -1) * centerOffset;
             default:
-                return pos;
+                return position;
         }
     }
 

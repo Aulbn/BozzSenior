@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class JumpController : PlayerController
 {
 
-    public Transform[] positions;
+    public PlayerPosition[] positions;
     public float transitionTime = 1;
     public float jumpCooldown;
     public AnimationCurve jumpCurve, speedCurve;
@@ -30,7 +30,7 @@ public class JumpController : PlayerController
 
     public void MoveToPosition(int positionIndex)
     {
-        if (!isMoving && transform.position != positions[positionIndex].position)
+        if (!isMoving && !positions[positionIndex].Contains(this))
             MoveCoroutine = StartCoroutine(IEMoveToPosition(positionIndex));
     } 
     
@@ -44,14 +44,14 @@ public class JumpController : PlayerController
 
         while (transition < transitionTime)
         {
-            transform.position = Vector3.Lerp(startPos, positions[destinationIndex].position, speedCurve.Evaluate(value));
+            transform.position = Vector3.Lerp(startPos, positions[destinationIndex].GetMultiPosition(this), speedCurve.Evaluate(value));
             transform.position = new Vector3(transform.position.x, transform.position.y * jumpCurve.Evaluate(speedCurve.Evaluate(value)), transform.position.z);
 
             yield return new WaitForEndOfFrame();
             transition += Time.deltaTime;
             value = transition / transitionTime;
         }
-        transform.position = positions[destinationIndex].position;
+        transform.position = positions[destinationIndex].GetMultiPosition(this);
         
         yield return new WaitForSecondsRealtime(jumpCooldown);
         isMoving = false;
