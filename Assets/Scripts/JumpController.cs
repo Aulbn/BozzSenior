@@ -13,7 +13,7 @@ public class JumpController : PlayerController
     public AnimationCurve jumpCurve, speedCurve;
 
     [Space]
-    public MeshRenderer _renderer;
+    public Renderer _renderer;
 
     private Coroutine MoveCoroutine;
     private bool isMoving = false;

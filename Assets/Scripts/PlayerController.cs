@@ -23,7 +23,6 @@ public abstract class PlayerController : MonoBehaviour
         Player.onNorth += OnNorth;
         Player.onEast += OnEast;
         Player.onSouth += OnSouth;
-        Player.onWest += OnWest;
     }
     private void OnDisable()
     {
@@ -39,7 +38,7 @@ public abstract class PlayerController : MonoBehaviour
     protected virtual void OnNorth(InputValue value) { }
     protected virtual void OnEast(InputValue value) { }
     protected virtual void OnSouth(InputValue value) { }
-    protected virtual void OnWest(InputValue value) { }
+    protected virtual void OnWest(InputValue value) { }    
 
     public void AddInputLock()
     {

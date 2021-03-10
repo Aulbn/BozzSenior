@@ -7,11 +7,15 @@ using TMPro;
 
 public class Lobby : MonoBehaviour
 {
-    public Transform playerContent;
-    public GameObject colorSelectPrefab;
+    //public Transform playerContent;
+    //public GameObject colorSelectPrefab;
+    public GameObject lobbyPlayerControllerPrefab;
+    public Transform lobbySpawn;
     public Transform continueText;
+    public RectTransform content;
 
     private static List<PlayerColorSelect> ColorPickers;
+    private Vector2 scrollTargetPosition;
 
     private void Awake()
     {
@@ -21,12 +25,15 @@ public class Lobby : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput player)
     {
-        SpawnColorPicker().Initiate(player.GetComponent<Player>());
+        Instantiate(lobbyPlayerControllerPrefab, lobbySpawn).GetComponent<LobbyPlayerController>().Initiate(player.GetComponent<Player>(), this);
+        //SpawnColorPicker().Initiate(player.GetComponent<Player>());
         Debug.Log(player.user.index + " joined");
     }
 
     private void Update()
     {
+        ButtonScrollUpdate();
+
         if (ColorPickers.Count < 1) return;
         foreach (PlayerColorSelect pcs in ColorPickers)
         {
@@ -48,8 +55,27 @@ public class Lobby : MonoBehaviour
         ColorPickers.Remove(pcs);
     }
 
-    public PlayerColorSelect SpawnColorPicker()
+    public void MoveCursor(int index)
     {
-        return Instantiate(colorSelectPrefab, playerContent).GetComponent<PlayerColorSelect>();
+        Debug.Log("!!" + index);
+        float height = 100;
+        float padding = 10;
+        //int nElements = 2;
+
+        float k = (height + padding) * index;
+        float m = (content.rect.height / 2) - height/2;
+
+        scrollTargetPosition = new Vector2(0, k - m);
+
     }
+
+    private void ButtonScrollUpdate()
+    {
+        content.localPosition = Vector2.Lerp(content.localPosition, scrollTargetPosition, Time.deltaTime * 10f);
+    }
+
+    //public PlayerColorSelect SpawnColorPicker()
+    //{
+    //    return Instantiate(colorSelectPrefab, playerContent).GetComponent<PlayerColorSelect>();
+    //}
 }
