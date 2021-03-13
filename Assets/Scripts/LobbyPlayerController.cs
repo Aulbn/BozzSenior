@@ -15,15 +15,22 @@ public class LobbyPlayerController : PlayerController
     [Header("References")]
     [SerializeField] private Renderer _renderer;
     private Lobby lobby;
+    private UIList outfitList;
 
-    public void Initiate(Player player, Lobby lobby)
+    public void Initiate(Player player, Lobby lobby, UIList outfitList)
     {
         SetPlayer(player);
         this.lobby = lobby;
+        this.outfitList = outfitList;
 
         cursorIndex = 0;
-        lobby.MoveCursor(cursorIndex);
+        outfitList.MoveTo(cursorIndex);
         UpdateColor();
+    }
+
+    private void Update()
+    {
+        outfitList.SetPosition(new Vector2(lobby.mainCamera.Camera.WorldToScreenPoint(transform.position).x, (Screen.height/3)*2));
     }
 
     protected override void OnMove(InputValue value)
@@ -34,7 +41,7 @@ public class LobbyPlayerController : PlayerController
         {
             switch (cursorIndex)
             {
-                case 3:
+                case 0:
                     colorIndex += (int)input.normalized.x;
                     colorIndex = MathUtils.Mod(colorIndex, colors.Length);
                     UpdateColor();
@@ -45,10 +52,9 @@ public class LobbyPlayerController : PlayerController
         }
         else
         {
-            cursorIndex = Mathf.Clamp(cursorIndex - (int)input.normalized.y, 0, 3);
-            Debug.Log("Cursor index: " + cursorIndex);
-            lobby.MoveCursor(cursorIndex);
+            cursorIndex = outfitList.Move(-(int)input.normalized.y);
         }
+        outfitList.AnimateButton(input.normalized);
     }
 
     private void UpdateColor()
