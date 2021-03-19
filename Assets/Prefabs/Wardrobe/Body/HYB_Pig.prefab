@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyRenderer: {fileID: 6507227013871854840}
-  hatPosition: {fileID: 242970435823721483}
+  hatParent: {fileID: 242970435823721483}
+  animator: {fileID: 5652477817188157597}
 --- !u!1 &9144305985956648680
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,11 +149,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: SK_Pig
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 01884858c74bb004c82af9cd30dde696,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 35b30bf481c48a94894862e668a5737f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01884858c74bb004c82af9cd30dde696, type: 3}
 --- !u!4 &1770352761414308583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 01884858c74bb004c82af9cd30dde696,
+    type: 3}
+  m_PrefabInstance: {fileID: 2241445753782678796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5652477817188157597 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 01884858c74bb004c82af9cd30dde696,
     type: 3}
   m_PrefabInstance: {fileID: 2241445753782678796}
   m_PrefabAsset: {fileID: 0}

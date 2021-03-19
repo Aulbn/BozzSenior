@@ -18,7 +18,9 @@ public class PlayerStats : MonoBehaviour
         health = Mathf.Clamp(health -= damage, 0, float.MaxValue);
         if (health <= 0)
         {
-            PlayerSpawner.RespawnPlayer(GetComponent<PlayerController>());
+            PlayerController controller = GetComponent<PlayerController>();
+            controller.OnDeath();
+            PlayerSpawner.RespawnPlayer(controller);
         }
     }
 

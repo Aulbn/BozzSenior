@@ -56,6 +56,14 @@ public class PlayerPosition : MonoBehaviour
         }
         return false;
     }
+    public static void ForceCancelReservation(PlayerController controller)
+    {
+        foreach (PlayerPosition p in AllPositions)
+        {
+            if (p.CancelReservation(controller))
+                break;
+        }
+    }
 
     private int GetPlayerIndex(PlayerController controller)
     {
@@ -71,24 +79,6 @@ public class PlayerPosition : MonoBehaviour
     {
         return GetPlayerIndex(controller) > -1;
     }
-
-    //public void MoveToPosition(MoveController controller)
-    //{
-    //    AddController(controller);
-    //    for (int i = 0; i < controllers.Count; i++)
-    //    {
-    //        controllers[i].MoveToPosition(GetMultiPosition(i), MoveController.TravelType.Teleport); //Move every controller on this position (PlayerPosition)
-    //    }
-    //}
-
-    //public void AddReservation()
-    //{
-
-    //}
-    //public void RemoveReservation()
-    //{
-
-    //}
 
     private int GetFreePositionIndex()
     {

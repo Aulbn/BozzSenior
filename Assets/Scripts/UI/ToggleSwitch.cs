@@ -18,17 +18,19 @@ public class ToggleSwitch : MonoBehaviour
 
     public void Toggle(bool isOn)
     {
-        this.isOn = isOn;
-        toggleButton.SetSprite(isOn ? SpriteDisplay.InputSprite.East : SpriteDisplay.InputSprite.South);
-        toggleMaskOff.fillAmount = isOn ? 0 : 1;
-        toggleMaskOn.fillAmount = isOn ? 1 : 0;
-        toggleBackground.color = isOn ? onColor : offColor;
+        Toggle(isOn, .15f);
     }
 
     public void Toggle(bool isOn, float transitionSpeed)
     {
         StopAllCoroutines();
         StartCoroutine(IETransition(isOn, transitionSpeed));
+    }
+
+    public bool Toggle()
+    {
+        Toggle(!isOn);
+        return isOn;
     }
 
     private IEnumerator IETransition(bool isOn, float transitionTime)
@@ -39,6 +41,8 @@ public class ToggleSwitch : MonoBehaviour
         Vector3 buttonStartPos = toggleButton.transform.position;
         float offMaskStartVal = toggleMaskOff.fillAmount, onMaskStartVal = toggleMaskOn.fillAmount;
         Color startColor = toggleBackground.color;
+
+        this.isOn = isOn;
 
         while (time < transitionTime)
         {
@@ -61,6 +65,10 @@ public class ToggleSwitch : MonoBehaviour
     private float Revealuate(float value, bool anti)
     {
         return (anti ? 1 : 0) - value * (anti ? 1 : -1);
+    }
+    public void SetPosition(Vector2 position)
+    {
+        ((RectTransform)transform).position = position;
     }
 
 }

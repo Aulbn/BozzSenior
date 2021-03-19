@@ -56,4 +56,9 @@ public class JumpController : PlayerController
         yield return new WaitForSecondsRealtime(jumpCooldown);
         isMoving = false;
     }
+
+    public override void OnDeath()
+    {
+        PlayerPosition.ForceCancelReservation(this);
+    }
 }

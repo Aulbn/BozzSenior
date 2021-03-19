@@ -34,14 +34,12 @@ public class PlayerColorSelect : MonoBehaviour
     private void OnEnable()
     {
         if (!player) return;
-        Lobby.AddColorPicker(this);
         player.onMove += ChangeColor;
         player.onSouth += OnSubmit;
         player.onEast += OnBack;
     }
     private void OnDisable()
     {
-        Lobby.RemoveColorPicker(this);
         player.onMove -= ChangeColor;
         player.onSouth -= OnSubmit;
         player.onEast -= OnBack;

@@ -7,50 +7,66 @@ using TMPro;
 
 public class Lobby : MonoBehaviour
 {
+    public float readyStartTime;
+    [Space]
     public GameObject lobbyPlayerControllerPrefab;
     public GameObject outfitListPrefab;
-    public Transform contentHolder;
-    public Transform continueText;
-    public MultipleTargetCamera mainCamera;
+    public GameObject readyTogglePrefab;
     [Space]
+    public Transform contentHolder;
+    public MultipleTargetCamera mainCamera;
+    public UITimer countdownTimer;
+    public GameObject countdownModule;
     public Transform[] spawnPoints;
 
-    private static List<PlayerColorSelect> ColorPickers;
+    private List<ToggleSwitch> _readySwitches;
 
     private void Awake()
     {
-        ColorPickers = new List<PlayerColorSelect>();
-        continueText.gameObject.SetActive(false);
+        _readySwitches = new List<ToggleSwitch>();
+        countdownModule.SetActive(false);
     }
 
     public void OnPlayerJoined(PlayerInput player)
     {
         LobbyPlayerController pc = Instantiate(lobbyPlayerControllerPrefab, spawnPoints[GameManager.Players.Length]).GetComponent<LobbyPlayerController>();
-        pc.Initiate(player.GetComponent<Player>(), this, Instantiate(outfitListPrefab, contentHolder).GetComponent<UIList>());
+        ToggleSwitch readySwitch = Instantiate(readyTogglePrefab, contentHolder).GetComponent<ToggleSwitch>();
+        _readySwitches.Add(readySwitch);
+
+        pc.Initiate(player.GetComponent<Player>(), this, 
+            Instantiate(outfitListPrefab, contentHolder).GetComponent<UIList>(),
+            readySwitch);
         mainCamera.AddTarget(pc.transform);
         Debug.Log(player.user.index + " joined");
     }
 
     private void Update()
     {
-        if (ColorPickers.Count < 1) return;
-        foreach (PlayerColorSelect pcs in ColorPickers)
+        bool isAllReady = true;
+        if (_readySwitches.Count < 1) return;
+        foreach (ToggleSwitch toggle in _readySwitches)
         {
-            if (!pcs.isReady)
+            if (!toggle.isOn)
             {
-                continueText.gameObject.SetActive(false);
-                return;
+                isAllReady = false;
+                break;
             }
         }
-        continueText.gameObject.SetActive(true);
-    }
+        countdownModule.SetActive(true);
 
-    public static void AddColorPicker(PlayerColorSelect pcs)
-    {
-        ColorPickers.Add(pcs);
-    }
-    public static void RemoveColorPicker(PlayerColorSelect pcs)
-    {
-        ColorPickers.Remove(pcs);
+        if (isAllReady)
+        {
+            if (!countdownTimer.isRunning) //Start start-coroutine
+            {
+                countdownModule.SetActive(true);
+                countdownTimer.StartTimer(readyStartTime, () => { Debug.Log("START GAME"); GameManager.LoadNextLevel(); }); //This is where we start next game
+            }
+        }
+        else
+        {
+            //Stop start-coroutine
+            countdownModule.SetActive(false);
+            countdownTimer.StopTimer();
+        }
     }
 }

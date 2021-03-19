@@ -15,8 +15,9 @@ public class Player : MonoBehaviour
     public int score;
     public int oldScore { get; private set; }
     public int Index { get { return GetComponent<PlayerInput>().user.index; } } //change if it is called often
-    //public int Index { get { return index >= 0 ? index : (index = GetComponent<PlayerInput>().user.index); } }
-    //private int index = -1;
+
+    private GameObject hybridModel;
+
     public PlayerController Controller { get; private set; }
 
     private void Start()
@@ -28,6 +29,17 @@ public class Player : MonoBehaviour
     public void SetController(PlayerController playerController)
     {
         Controller = playerController;
+    }
+
+    public void SaveHybridModel(GameObject hybridGameObject)
+    {
+        hybridModel = Instantiate(hybridGameObject, transform);
+        hybridModel.transform.localPosition = Vector3.zero;
+        hybridModel.SetActive(false);
+    }
+    public HybridModel GetHybridModelCopy(Transform parent)
+    {
+        return Instantiate(hybridModel, parent).GetComponent<HybridModel>();
     }
 
     public void Disconnect()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class HybridModel : MonoBehaviour
 {
     public Renderer bodyRenderer;
-    public Transform hatPosition;
-
+    public Transform hatParent;
+    [SerializeField] private Animator animator;
 
 }

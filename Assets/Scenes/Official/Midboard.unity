@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1639,8 +1639,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1593422019}
   - component: {fileID: 1593422022}
-  - component: {fileID: 1593422023}
-  - component: {fileID: 1593422021}
   m_Layer: 5
   m_Name: Coutdown
   m_TagString: Untagged
@@ -1669,36 +1667,6 @@ RectTransform:
   m_AnchoredPosition: {x: 603.30115, y: -452}
   m_SizeDelta: {x: 618.0447, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1593422021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593422018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.50980395, b: 0.9411765, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1593422022
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1707,22 +1675,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593422018}
   m_CullTransparentMesh: 1
---- !u!114 &1593422023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593422018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdaba70089b6aa94694254ed5004d76c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  input: 1
-  scheme: 0
-  image: {fileID: 0}
-  background: {fileID: 0}
 --- !u!1001 &1610007086
 PrefabInstance:
   m_ObjectHideFlags: 0
