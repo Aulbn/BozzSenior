@@ -31,7 +31,7 @@ public class PlayerSpawner : MonoBehaviour
 
     public void SpawnAllPlayers()
     {
-        Debug.Log(GameManager.Players.Length);
+        Debug.Log("Spawn all players: " + GameManager.Players.Length);
         foreach(Player p in GameManager.Players)
         {
             SpawnPlayer(p);

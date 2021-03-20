@@ -29,6 +29,7 @@ public class LobbyPlayerController : PlayerController
         _outfitList = outfitList;
         _readyToggle = toggleSwitch;
 
+        player.SetController(this);
         //cursorIndex = 0;
         hatIndex = hatModels.Length;
         outfitList.MoveTo(cursorIndex);
@@ -91,9 +92,17 @@ public class LobbyPlayerController : PlayerController
     {
         _renderer.material.SetColor("_BaseColor", colors[colorIndex]);
     }
-    private void SaveHybridCharacter()
+    public void SaveHybridCharacter()
     {
         Player.SaveHybridModel(currentHybrid.gameObject);
+        Player.color = colors[colorIndex];
     }
+
+    //private void OnDisable()
+    //{
+    //    Debug.Log("Save!");
+    //    SaveHybridCharacter();
+    //    Player.color = colors[colorIndex];
+    //}
 
 }

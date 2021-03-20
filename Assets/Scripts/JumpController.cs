@@ -14,6 +14,7 @@ public class JumpController : PlayerController
 
     [Space]
     public Renderer _renderer;
+    public Transform hybridModelParent;
 
     private Coroutine MoveCoroutine;
     private bool isMoving = false;
@@ -26,6 +27,12 @@ public class JumpController : PlayerController
     private void Start()
     {
         _renderer.material.SetColor("_BaseColor", Player.color);
+
+        foreach (Transform child in hybridModelParent)
+        {
+            Destroy(child.gameObject);
+        }
+        Player.GetHybridModelCopy(hybridModelParent).gameObject.SetActive(true);
     }
 
     public void MoveToPosition(int positionIndex)

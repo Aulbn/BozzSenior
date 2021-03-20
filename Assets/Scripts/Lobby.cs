@@ -59,7 +59,7 @@ public class Lobby : MonoBehaviour
             if (!countdownTimer.isRunning) //Start start-coroutine
             {
                 countdownModule.SetActive(true);
-                countdownTimer.StartTimer(readyStartTime, () => { Debug.Log("START GAME"); GameManager.LoadNextLevel(); }); //This is where we start next game
+                countdownTimer.StartTimer(readyStartTime, () => { Debug.Log("START GAME"); SaveAllHybridModels(); GameManager.LoadNextLevel(); }); //This is where we start next game
             }
         }
         else
@@ -67,6 +67,14 @@ public class Lobby : MonoBehaviour
             //Stop start-coroutine
             countdownModule.SetActive(false);
             countdownTimer.StopTimer();
+        }
+    }
+
+    private void SaveAllHybridModels()
+    {
+        foreach (Player p in GameManager.Players)
+        {
+            ((LobbyPlayerController)p.Controller).SaveHybridCharacter();
         }
     }
 }
