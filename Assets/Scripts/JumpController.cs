@@ -28,11 +28,14 @@ public class JumpController : PlayerController
     {
         _renderer.material.SetColor("_BaseColor", Player.color);
 
-        foreach (Transform child in hybridModelParent)
+        if (Player.HasHybridModel)
         {
-            Destroy(child.gameObject);
+            foreach (Transform child in hybridModelParent)
+            {
+                Destroy(child.gameObject);
+            }
+            Player.GetHybridModelCopy(hybridModelParent).gameObject.SetActive(true);
         }
-        Player.GetHybridModelCopy(hybridModelParent).gameObject.SetActive(true);
     }
 
     public void MoveToPosition(int positionIndex)

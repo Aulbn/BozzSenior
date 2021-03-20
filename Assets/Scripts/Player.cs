@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public int score;
     public int oldScore { get; private set; }
     public int Index { get { return GetComponent<PlayerInput>().user.index; } } //change if it is called often
-
+    public bool HasHybridModel { get { return hybridModel != null; } }
     private GameObject hybridModel;
 
     public PlayerController Controller { get; private set; }
@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     }
     public HybridModel GetHybridModelCopy(Transform parent)
     {
+        if (hybridModel == null) return null;
         return Instantiate(hybridModel, parent).GetComponent<HybridModel>();
     }
 
