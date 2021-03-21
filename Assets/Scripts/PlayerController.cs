@@ -9,6 +9,8 @@ public abstract class PlayerController : MonoBehaviour
     public bool HasControl { get { return inputLocks == 0; } }
     private int inputLocks;
 
+    private Coroutine _delayedEnableCoroutine;
+
     public void SetPlayer(Player player)
     {
         OnDisable();
@@ -18,12 +20,9 @@ public abstract class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        if (!Player) return;
-        Player.onMove += OnMove;
-        Player.onNorth += OnNorth;
-        Player.onEast += OnEast;
-        Player.onSouth += OnSouth;
-        Player.onWest += OnWest;
+        if (_delayedEnableCoroutine != null)
+            StopCoroutine(_delayedEnableCoroutine);
+        _delayedEnableCoroutine = StartCoroutine(IEDelayedEnable());
     }
     private void OnDisable()
     {
@@ -33,6 +32,19 @@ public abstract class PlayerController : MonoBehaviour
         Player.onEast -= OnEast;
         Player.onSouth -= OnSouth;
         Player.onWest -= OnWest;
+    }
+
+    private IEnumerator IEDelayedEnable()
+    {
+        yield return 0; //Wait one frame
+        if (Player)
+        {
+            Player.onMove += OnMove;
+            Player.onNorth += OnNorth;
+            Player.onEast += OnEast;
+            Player.onSouth += OnSouth;
+            Player.onWest += OnWest;
+        }
     }
 
     protected virtual void OnMove(InputValue value) { }

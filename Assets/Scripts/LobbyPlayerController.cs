@@ -16,7 +16,7 @@ public class LobbyPlayerController : PlayerController
     [SerializeField] private Renderer _renderer;
     private Lobby lobby;
     private UIList _outfitList;
-    private ToggleSwitch _readyToggle;
+    public ToggleSwitch _readyToggle { get; private set; }
     private GameObject _currentHat;
     [SerializeField] private HybridModel currentHybrid;
 
@@ -77,15 +77,43 @@ public class LobbyPlayerController : PlayerController
 
     protected override void OnSouth(InputValue value)
     {
-        isReady = _readyToggle.Toggle();
-        _outfitList.gameObject.SetActive(!isReady);
+        ToggleReady(_readyToggle.Toggle());
+        //isReady = _readyToggle.Toggle();
+        //_outfitList.gameObject.SetActive(!isReady);
     }
 
     protected override void OnEast(InputValue value)
     {
+        if (!isReady)
+        {
+            Disconnect();
+            return;
+        }
         _readyToggle.Toggle(false);
-        isReady = false;
+        ToggleReady(false);
+    }
+
+    protected override void OnWest(InputValue value)
+    {
+        Debug.Log(GameManager.Players.Length);
+    }
+
+    private void ToggleReady(bool isOn)
+    {
+        isReady = isOn;
         _outfitList.gameObject.SetActive(!isReady);
+        if (isReady)
+            lobby.nOReadySwitches++;
+        else
+            lobby.nOReadySwitches--;
+    }
+
+    private void Disconnect()
+    {
+        Player.Disconnect();
+        Destroy(_readyToggle.gameObject);
+        Destroy(_outfitList.gameObject);
+        Destroy(gameObject);
     }
 
     private void UpdateColor()

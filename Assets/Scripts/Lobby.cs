@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class Lobby : MonoBehaviour
 {
@@ -19,11 +20,11 @@ public class Lobby : MonoBehaviour
     public GameObject countdownModule;
     public Transform[] spawnPoints;
 
-    private List<ToggleSwitch> _readySwitches;
+    [HideInInspector]public int nOReadySwitches;
 
     private void Awake()
     {
-        _readySwitches = new List<ToggleSwitch>();
+        //_readySwitches = new List<ToggleSwitch>();
         countdownModule.SetActive(false);
     }
 
@@ -31,7 +32,7 @@ public class Lobby : MonoBehaviour
     {
         LobbyPlayerController pc = Instantiate(lobbyPlayerControllerPrefab, spawnPoints[GameManager.Players.Length]).GetComponent<LobbyPlayerController>();
         ToggleSwitch readySwitch = Instantiate(readyTogglePrefab, contentHolder).GetComponent<ToggleSwitch>();
-        _readySwitches.Add(readySwitch);
+        //_readySwitches.Add(readySwitch);
 
         pc.Initiate(player.GetComponent<Player>(), this, 
             Instantiate(outfitListPrefab, contentHolder).GetComponent<UIList>(),
@@ -42,17 +43,10 @@ public class Lobby : MonoBehaviour
 
     private void Update()
     {
-        bool isAllReady = true;
-        if (_readySwitches.Count < 1) return;
-        foreach (ToggleSwitch toggle in _readySwitches)
-        {
-            if (!toggle.isOn)
-            {
-                isAllReady = false;
-                break;
-            }
-        }
-        countdownModule.SetActive(true);
+        bool isAllReady = false;
+        if (nOReadySwitches > 0 && nOReadySwitches == GameManager.Players.Length)
+            isAllReady = true;
+        countdownModule.SetActive(isAllReady);
 
         if (isAllReady)
         {

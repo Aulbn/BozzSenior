@@ -26,13 +26,16 @@ public class MultipleTargetCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (targets == null || targets.Count < 1) return;
+        //if (targets == null || targets.Count < 1) return;
+        if (GameManager.Players == null || GameManager.Players.Length < 1) return;
 
         //Bounds
-        Bounds bounds = new Bounds(targets[0].position, Vector3.zero);
-        foreach (Transform t in targets)
+        //Bounds bounds = new Bounds(targets[0].position, Vector3.zero);
+        Bounds bounds = new Bounds(GameManager.Players[0].Controller.transform.position, Vector3.zero);
+        //foreach (Transform t in targets)
+        foreach (Player p in GameManager.Players)
         {
-            bounds.Encapsulate(t.position);
+            bounds.Encapsulate(p.Controller.transform.position);
         }
 
         //Move
