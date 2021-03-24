@@ -7,7 +7,7 @@ public abstract class PlayerController : MonoBehaviour
 {
     public Player Player { get; private set; }
     public bool HasControl { get { return inputLocks == 0; } }
-    private int inputLocks;
+    private int inputLocks = 0;
 
     private Coroutine _delayedEnableCoroutine;
 
@@ -20,6 +20,7 @@ public abstract class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        if (inputLocks > 0) return;
         if (_delayedEnableCoroutine != null)
             StopCoroutine(_delayedEnableCoroutine);
         _delayedEnableCoroutine = StartCoroutine(IEDelayedEnable());
@@ -37,7 +38,7 @@ public abstract class PlayerController : MonoBehaviour
     private IEnumerator IEDelayedEnable()
     {
         yield return 0; //Wait one frame
-        if (Player)
+        if (Player && inputLocks < 1)
         {
             Player.onMove += OnMove;
             Player.onNorth += OnNorth;
@@ -68,7 +69,7 @@ public abstract class PlayerController : MonoBehaviour
         if (!Player) return;
 
         inputLocks = Mathf.Clamp(--inputLocks, 0, int.MaxValue);
-        if (inputLocks < 1)
+        if (inputLocks == 0)
             OnEnable();
     }
 }

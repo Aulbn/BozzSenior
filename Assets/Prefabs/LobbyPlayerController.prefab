@@ -54,6 +54,8 @@ MonoBehaviour:
   hybridModels: []
   hatModels:
   - {fileID: 847692917831224978, guid: 206b526fd8157ea40b0a5a4c7e7e437c, type: 3}
+  - {fileID: 2730270897876738279, guid: b18d1cb343a012948a566ca680e59997, type: 3}
+  - {fileID: 7097742071360246039, guid: 0b7dbcd2908886942af012b811268f36, type: 3}
   colorIndex: 0
   hybridIndex: 0
   hatIndex: 0

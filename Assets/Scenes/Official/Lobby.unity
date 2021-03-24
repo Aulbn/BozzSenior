@@ -857,6 +857,7 @@ MonoBehaviour:
   - {fileID: 221047732}
   - {fileID: 2089323247}
   - {fileID: 1690966762}
+  nOReadySwitches: 0
 --- !u!4 &1715334241
 Transform:
   m_ObjectHideFlags: 0
