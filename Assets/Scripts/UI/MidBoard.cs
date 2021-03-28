@@ -96,14 +96,14 @@ public class MidBoard : MonoBehaviour
     {
         foreach (PlayerScoreCard card in playerCards)
         {
-            card.AddPoints(card.Player.score - card.Player.oldScore, .1f);
+            card.AddPoints(card.Player.Score - card.Player.oldScore, .1f);
         }
     }
 
     private void OrderCards(bool oldScore)
     {
         //PlayerScoreCard[] cardsOrdered = playerCards.OrderByDescending(card => int.Parse(card.scoreText.text)).ToArray(); //Order
-        PlayerScoreCard[] cardsOrdered = playerCards.OrderByDescending(card => oldScore ? card.Player.oldScore : card.Player.score).ToArray(); //Order
+        PlayerScoreCard[] cardsOrdered = playerCards.OrderByDescending(card => oldScore ? card.Player.oldScore : card.Player.Score).ToArray(); //Order
 
         for (int i = 0; i < playerCards.Count; i++) //Move to correct order (we can animate this instead)
         {

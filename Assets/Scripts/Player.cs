@@ -7,23 +7,26 @@ using System;
 [Serializable]
 public class Player : MonoBehaviour
 {
-    //[Header("DEBUG")]
-
     [Header("Stats")]
     public string playerName;
     public Color color;
-    public int score;
+    [SerializeField] private int score;
+
+    public int Score { get { return score; } }
     public int oldScore { get; private set; }
     public int Index { get { return GetComponent<PlayerInput>().user.index; } } //change if it is called often
     public bool HasHybridModel { get { return hybridModel != null; } }
     private GameObject hybridModel;
-
     public PlayerController Controller { get; private set; }
+    
+    private PlayerActions actions;
 
     private void Start()
     {
         transform.SetParent(GameManager.Instance.transform);
         GameManager.AddPlayer(this);
+
+        SetUpInput();
     }
 
     public void SetController(PlayerController playerController)
@@ -55,6 +58,14 @@ public class Player : MonoBehaviour
         this.score += score;
     }
 
+    void shit(InputAction.CallbackContext context)
+    {
+        Debug.Log("New! " + Index);
+    }
+    void testprint()
+    {
+        Debug.Log("Old " + Index);
+    }
 
     private IEnumerator DelayedDestruction()
     {
@@ -62,6 +73,7 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
+    //------------------------INPUT------------------------//
     //--Delegates--//
     public delegate void OnInputValue(InputAction.CallbackContext context);
     public delegate void OnInput();
@@ -74,6 +86,24 @@ public class Player : MonoBehaviour
     public OnInput onSouthUp;
     public OnInput onWest;
     public OnInput onWestUp;
+
+    private void SetUpInput()
+    {
+        actions = new PlayerActions();
+        actions.devices = GetComponent<PlayerInput>().devices;
+
+        actions.Lobby.Move.performed += OnMove;
+        actions.Lobby.Move.Enable();
+
+        actions.Lobby.West.performed += OnWest;
+        actions.Lobby.West.Enable();
+        actions.Lobby.East.performed += OnEast;
+        actions.Lobby.East.Enable();
+        actions.Lobby.North.performed += OnNorth;
+        actions.Lobby.North.Enable();
+        actions.Lobby.South.performed += OnSouth;
+        actions.Lobby.South.Enable();
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
