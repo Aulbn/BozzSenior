@@ -63,8 +63,9 @@ public class Player : MonoBehaviour
     }
 
     //--Delegates--//
-    public delegate void OnInput(InputAction.CallbackContext context);
-    public OnInput onMove;
+    public delegate void OnInputValue(InputAction.CallbackContext context);
+    public delegate void OnInput();
+    public OnInputValue onMove;
     public OnInput onNorth;
     public OnInput onNorthUp;
     public OnInput onEast;
@@ -77,39 +78,40 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         if (onMove == null) return;
+        if (context.performed)
             onMove(context);
     }
     public void OnNorth(InputAction.CallbackContext context)
     {
         if (onNorth == null) return;
         if (context.performed)
-            onNorth(context);
+            onNorth();
         else if (context.canceled)
-            onNorthUp(context);
+            onNorthUp();
     }
     public void OnEast(InputAction.CallbackContext context)
     {
         if (onEast == null) return;
         if (context.performed)
-            onEast(context);
+            onEast();
         else if (context.canceled)
-            onEastUp(context);
+            onEastUp();
     }
     public void OnSouth(InputAction.CallbackContext context)
     {
         if (onSouth == null) return;
         if (context.performed)
-            onSouth(context);
+            onSouth();
         else if (context.canceled)
-            onSouthUp(context);
+            onSouthUp();
     }
     public void OnWest(InputAction.CallbackContext context)
     {
         if (onWest == null) return;
         if (context.performed)
-            onWest(context);
+            onWest();
         else if (context.canceled)
-            onWestUp(context);
+            onWestUp();
     }
 
 }

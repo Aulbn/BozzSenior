@@ -57,14 +57,14 @@ public abstract class PlayerController : MonoBehaviour
     }
 
     protected virtual void OnMove(InputAction.CallbackContext context) { }
-    protected virtual void OnNorth(InputAction.CallbackContext context) { }
-    protected virtual void OnNorthUp(InputAction.CallbackContext context) { }
-    protected virtual void OnEast(InputAction.CallbackContext context) { }
-    protected virtual void OnEastUp(InputAction.CallbackContext context) { }
-    protected virtual void OnSouth(InputAction.CallbackContext context) { }
-    protected virtual void OnSouthUp(InputAction.CallbackContext context) { }
-    protected virtual void OnWest(InputAction.CallbackContext context) { }
-    protected virtual void OnWestUp(InputAction.CallbackContext context) { }
+    protected virtual void OnNorth() { }
+    protected virtual void OnNorthUp() { }
+    protected virtual void OnEast() { }
+    protected virtual void OnEastUp() { }
+    protected virtual void OnSouth() { }
+    protected virtual void OnSouthUp() { }
+    protected virtual void OnWest() { }
+    protected virtual void OnWestUp() { }
 
     public virtual void OnDeath() { }
 

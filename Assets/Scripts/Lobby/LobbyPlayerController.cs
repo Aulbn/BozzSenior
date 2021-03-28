@@ -75,12 +75,12 @@ public class LobbyPlayerController : PlayerController
         _outfitList.AnimateButton(input.normalized);
     }
 
-    protected override void OnSouth(InputAction.CallbackContext context)
+    protected override void OnSouth()
     {
         ToggleReady(_readyToggle.Toggle());
     }
 
-    protected override void OnEast(InputAction.CallbackContext context)
+    protected override void OnEast()
     {
         if (!isReady)
         {
@@ -89,11 +89,6 @@ public class LobbyPlayerController : PlayerController
         }
         _readyToggle.Toggle(false);
         ToggleReady(false);
-    }
-
-    protected override void OnWest(InputAction.CallbackContext context)
-    {
-        Debug.Log(GameManager.Players.Length);
     }
 
     private void ToggleReady(bool isOn)
