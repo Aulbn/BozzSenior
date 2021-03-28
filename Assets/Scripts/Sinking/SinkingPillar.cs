@@ -34,10 +34,11 @@ public class SinkingPillar : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.transform.parent != transform)
         {
             nPlayers++;
             other.transform.SetParent(transform);
+            Debug.Log("land: " + other.gameObject.name + ", " + nPlayers);
         }
     }
 
@@ -47,6 +48,7 @@ public class SinkingPillar : MonoBehaviour
         {
             nPlayers--;
             other.transform.parent = null;
+            Debug.Log("leave: " + nPlayers);
         }
     }
 
