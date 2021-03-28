@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class SinkingPillar : MonoBehaviour
 {
-    //public Collider trigger;
     public float sinkSpeedMultiplier;
     public float riseSpeed;
 
     public bool isActive = true;
 
     private int nPlayers;
-    private float originHeight;
+    private Vector3 originPos;
 
     private void Start()
     {
-        originHeight = transform.position.y;
+        originPos = transform.position;
     }
 
     void Update()
@@ -26,9 +25,9 @@ public class SinkingPillar : MonoBehaviour
         {
             transform.position -= Vector3.up * sinkSpeedMultiplier * nPlayers * Time.deltaTime;
         }
-        else if(transform.position.y != originHeight)//Rise
+        else if(transform.position != originPos)//Rise
         {
-            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y + riseSpeed * Time.deltaTime, transform.position.y, originHeight), transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, originPos, riseSpeed * Time.deltaTime);
         }
     }
 
@@ -38,7 +37,6 @@ public class SinkingPillar : MonoBehaviour
         {
             nPlayers++;
             other.transform.SetParent(transform);
-            Debug.Log("land: " + other.gameObject.name + ", " + nPlayers);
         }
     }
 
@@ -48,7 +46,6 @@ public class SinkingPillar : MonoBehaviour
         {
             nPlayers--;
             other.transform.parent = null;
-            Debug.Log("leave: " + nPlayers);
         }
     }
 

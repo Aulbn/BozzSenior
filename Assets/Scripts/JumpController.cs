@@ -19,10 +19,11 @@ public class JumpController : PlayerController
     private Coroutine MoveCoroutine;
     private bool isMoving = false;
 
-    protected override void OnSouth(InputValue value) {MoveToPosition(0);}
-    protected override void OnWest(InputValue value) {MoveToPosition(1);}
-    protected override void OnNorth(InputValue value) {MoveToPosition(3);}
-    protected override void OnEast(InputValue value) {MoveToPosition(2);}
+    protected override void OnSouth(InputAction.CallbackContext context) {MoveToPosition(0);}
+    protected override void OnWest(InputAction.CallbackContext context) {MoveToPosition(1);}
+    protected override void OnNorth(InputAction.CallbackContext context) {MoveToPosition(3);}
+    protected override void OnEast(InputAction.CallbackContext context) {MoveToPosition(2);}
+
 
     private void Start()
     {

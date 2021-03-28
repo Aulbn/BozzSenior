@@ -42,11 +42,11 @@ public class LobbyPlayerController : PlayerController
         ((RectTransform)_readyToggle.transform).position = new Vector2(lobby.mainCamera.Camera.WorldToScreenPoint(transform.position).x, ((RectTransform)_readyToggle.transform).rect.height);
     }
 
-    protected override void OnMove(InputValue value)
+    protected override void OnMove(InputAction.CallbackContext context)
     {
         if (isReady) return;
 
-        Vector2 input = value.Get<Vector2>();
+        Vector2 input = context.ReadValue<Vector2>();
 
         if (input.x != 0)
         {
@@ -75,14 +75,12 @@ public class LobbyPlayerController : PlayerController
         _outfitList.AnimateButton(input.normalized);
     }
 
-    protected override void OnSouth(InputValue value)
+    protected override void OnSouth(InputAction.CallbackContext context)
     {
         ToggleReady(_readyToggle.Toggle());
-        //isReady = _readyToggle.Toggle();
-        //_outfitList.gameObject.SetActive(!isReady);
     }
 
-    protected override void OnEast(InputValue value)
+    protected override void OnEast(InputAction.CallbackContext context)
     {
         if (!isReady)
         {
@@ -93,7 +91,7 @@ public class LobbyPlayerController : PlayerController
         ToggleReady(false);
     }
 
-    protected override void OnWest(InputValue value)
+    protected override void OnWest(InputAction.CallbackContext context)
     {
         Debug.Log(GameManager.Players.Length);
     }
@@ -125,12 +123,4 @@ public class LobbyPlayerController : PlayerController
         Player.SaveHybridModel(currentHybrid.gameObject);
         Player.color = colors[colorIndex];
     }
-
-    //private void OnDisable()
-    //{
-    //    Debug.Log("Save!");
-    //    SaveHybridCharacter();
-    //    Player.color = colors[colorIndex];
-    //}
-
 }

@@ -30,9 +30,13 @@ public abstract class PlayerController : MonoBehaviour
         if (!Player) return;
         Player.onMove -= OnMove;
         Player.onNorth -= OnNorth;
+        Player.onNorthUp -= OnNorthUp;
         Player.onEast -= OnEast;
+        Player.onEastUp -= OnEastUp;
         Player.onSouth -= OnSouth;
+        Player.onSouthUp -= OnSouthUp;
         Player.onWest -= OnWest;
+        Player.onWestUp -= OnWestUp;
     }
 
     private IEnumerator IEDelayedEnable()
@@ -42,17 +46,25 @@ public abstract class PlayerController : MonoBehaviour
         {
             Player.onMove += OnMove;
             Player.onNorth += OnNorth;
+            Player.onNorthUp += OnNorthUp;
             Player.onEast += OnEast;
+            Player.onEastUp += OnEastUp;
             Player.onSouth += OnSouth;
+            Player.onSouthUp += OnSouthUp;
             Player.onWest += OnWest;
+            Player.onWestUp += OnWestUp;
         }
     }
 
-    protected virtual void OnMove(InputValue value) { }
-    protected virtual void OnNorth(InputValue value) { }
-    protected virtual void OnEast(InputValue value) { }
-    protected virtual void OnSouth(InputValue value) { }
-    protected virtual void OnWest(InputValue value) { }
+    protected virtual void OnMove(InputAction.CallbackContext context) { }
+    protected virtual void OnNorth(InputAction.CallbackContext context) { }
+    protected virtual void OnNorthUp(InputAction.CallbackContext context) { }
+    protected virtual void OnEast(InputAction.CallbackContext context) { }
+    protected virtual void OnEastUp(InputAction.CallbackContext context) { }
+    protected virtual void OnSouth(InputAction.CallbackContext context) { }
+    protected virtual void OnSouthUp(InputAction.CallbackContext context) { }
+    protected virtual void OnWest(InputAction.CallbackContext context) { }
+    protected virtual void OnWestUp(InputAction.CallbackContext context) { }
 
     public virtual void OnDeath() { }
 

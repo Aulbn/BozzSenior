@@ -71,12 +71,12 @@ public class PlayerScoreCard : PlayerController
         });
     }
 
-    protected override void OnSouth(InputValue value)
+    protected override void OnSouth(InputAction.CallbackContext context)
     {
         ToggleReady(!isReady);
     }
 
-    protected override void OnEast(InputValue value)
+    protected override void OnEast(InputAction.CallbackContext context)
     {
         ToggleReady(false);
     }
