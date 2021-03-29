@@ -154,7 +154,7 @@ MonoBehaviour:
     m_ActionId: 9025212e-d43a-4ddc-8d63-b0b5dc2b9431
     m_ActionName: Lobby/West[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard
-  m_DefaultActionMap: Lobby
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

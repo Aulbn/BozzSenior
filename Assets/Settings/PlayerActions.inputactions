@@ -2,7 +2,7 @@
     "name": "PlayerActions",
     "maps": [
         {
-            "name": "Lobby",
+            "name": "Gameplay",
             "id": "3d25b682-228d-4e5b-bc38-aa5fe6ceb8c4",
             "actions": [
                 {

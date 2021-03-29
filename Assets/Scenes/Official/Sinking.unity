@@ -677,6 +677,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2720773814254655910, guid: 6b5a97088c3ca954fa34b115e0a63f4f,
         type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 3d25b682-228d-4e5b-bc38-aa5fe6ceb8c4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2720773814254655910, guid: 6b5a97088c3ca954fa34b115e0a63f4f,
+        type: 3}
       propertyPath: m_DefaultControlScheme
       value: Gamepad
       objectReference: {fileID: 0}
@@ -684,6 +689,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: '[PlayerHandler]_1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163277147059420208, guid: 6b5a97088c3ca954fa34b115e0a63f4f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b5a97088c3ca954fa34b115e0a63f4f, type: 3}
@@ -11881,6 +11891,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2720773814254655910, guid: 6b5a97088c3ca954fa34b115e0a63f4f,
         type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 3d25b682-228d-4e5b-bc38-aa5fe6ceb8c4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2720773814254655910, guid: 6b5a97088c3ca954fa34b115e0a63f4f,
+        type: 3}
       propertyPath: m_DefaultControlScheme
       value: Keyboard
       objectReference: {fileID: 0}
@@ -11888,6 +11903,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: '[PlayerHandler]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163277147059420208, guid: 6b5a97088c3ca954fa34b115e0a63f4f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b5a97088c3ca954fa34b115e0a63f4f, type: 3}

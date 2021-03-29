@@ -15,7 +15,7 @@ public class @PlayerActions : IInputActionCollection, IDisposable
     ""name"": ""PlayerActions"",
     ""maps"": [
         {
-            ""name"": ""Lobby"",
+            ""name"": ""Gameplay"",
             ""id"": ""3d25b682-228d-4e5b-bc38-aa5fe6ceb8c4"",
             ""actions"": [
                 {
@@ -341,13 +341,13 @@ public class @PlayerActions : IInputActionCollection, IDisposable
         }
     ]
 }");
-        // Lobby
-        m_Lobby = asset.FindActionMap("Lobby", throwIfNotFound: true);
-        m_Lobby_Move = m_Lobby.FindAction("Move", throwIfNotFound: true);
-        m_Lobby_North = m_Lobby.FindAction("North", throwIfNotFound: true);
-        m_Lobby_East = m_Lobby.FindAction("East", throwIfNotFound: true);
-        m_Lobby_South = m_Lobby.FindAction("South", throwIfNotFound: true);
-        m_Lobby_West = m_Lobby.FindAction("West", throwIfNotFound: true);
+        // Gameplay
+        m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
+        m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay_North = m_Gameplay.FindAction("North", throwIfNotFound: true);
+        m_Gameplay_East = m_Gameplay.FindAction("East", throwIfNotFound: true);
+        m_Gameplay_South = m_Gameplay.FindAction("South", throwIfNotFound: true);
+        m_Gameplay_West = m_Gameplay.FindAction("West", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -394,49 +394,49 @@ public class @PlayerActions : IInputActionCollection, IDisposable
         asset.Disable();
     }
 
-    // Lobby
-    private readonly InputActionMap m_Lobby;
-    private ILobbyActions m_LobbyActionsCallbackInterface;
-    private readonly InputAction m_Lobby_Move;
-    private readonly InputAction m_Lobby_North;
-    private readonly InputAction m_Lobby_East;
-    private readonly InputAction m_Lobby_South;
-    private readonly InputAction m_Lobby_West;
-    public struct LobbyActions
+    // Gameplay
+    private readonly InputActionMap m_Gameplay;
+    private IGameplayActions m_GameplayActionsCallbackInterface;
+    private readonly InputAction m_Gameplay_Move;
+    private readonly InputAction m_Gameplay_North;
+    private readonly InputAction m_Gameplay_East;
+    private readonly InputAction m_Gameplay_South;
+    private readonly InputAction m_Gameplay_West;
+    public struct GameplayActions
     {
         private @PlayerActions m_Wrapper;
-        public LobbyActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Lobby_Move;
-        public InputAction @North => m_Wrapper.m_Lobby_North;
-        public InputAction @East => m_Wrapper.m_Lobby_East;
-        public InputAction @South => m_Wrapper.m_Lobby_South;
-        public InputAction @West => m_Wrapper.m_Lobby_West;
-        public InputActionMap Get() { return m_Wrapper.m_Lobby; }
+        public GameplayActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction @North => m_Wrapper.m_Gameplay_North;
+        public InputAction @East => m_Wrapper.m_Gameplay_East;
+        public InputAction @South => m_Wrapper.m_Gameplay_South;
+        public InputAction @West => m_Wrapper.m_Gameplay_West;
+        public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(LobbyActions set) { return set.Get(); }
-        public void SetCallbacks(ILobbyActions instance)
+        public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
+        public void SetCallbacks(IGameplayActions instance)
         {
-            if (m_Wrapper.m_LobbyActionsCallbackInterface != null)
+            if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_LobbyActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_LobbyActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_LobbyActionsCallbackInterface.OnMove;
-                @North.started -= m_Wrapper.m_LobbyActionsCallbackInterface.OnNorth;
-                @North.performed -= m_Wrapper.m_LobbyActionsCallbackInterface.OnNorth;
-                @North.canceled -= m_Wrapper.m_LobbyActionsCallbackInterface.OnNorth;
-                @East.started -= m_Wrapper.m_LobbyActionsCallbackInterface.OnEast;
-                @East.performed -= m_Wrapper.m_LobbyActionsCallbackInterface.OnEast;
-                @East.canceled -= m_Wrapper.m_LobbyActionsCallbackInterface.OnEast;
-                @South.started -= m_Wrapper.m_LobbyActionsCallbackInterface.OnSouth;
-                @South.performed -= m_Wrapper.m_LobbyActionsCallbackInterface.OnSouth;
-                @South.canceled -= m_Wrapper.m_LobbyActionsCallbackInterface.OnSouth;
-                @West.started -= m_Wrapper.m_LobbyActionsCallbackInterface.OnWest;
-                @West.performed -= m_Wrapper.m_LobbyActionsCallbackInterface.OnWest;
-                @West.canceled -= m_Wrapper.m_LobbyActionsCallbackInterface.OnWest;
+                @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @North.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNorth;
+                @North.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNorth;
+                @North.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNorth;
+                @East.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEast;
+                @East.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEast;
+                @East.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEast;
+                @South.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSouth;
+                @South.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSouth;
+                @South.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSouth;
+                @West.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWest;
+                @West.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWest;
+                @West.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWest;
             }
-            m_Wrapper.m_LobbyActionsCallbackInterface = instance;
+            m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Move.started += instance.OnMove;
@@ -457,7 +457,7 @@ public class @PlayerActions : IInputActionCollection, IDisposable
             }
         }
     }
-    public LobbyActions @Lobby => new LobbyActions(this);
+    public GameplayActions @Gameplay => new GameplayActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -476,7 +476,7 @@ public class @PlayerActions : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
-    public interface ILobbyActions
+    public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnNorth(InputAction.CallbackContext context);

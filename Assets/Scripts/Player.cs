@@ -58,15 +58,6 @@ public class Player : MonoBehaviour
         this.score += score;
     }
 
-    void shit(InputAction.CallbackContext context)
-    {
-        Debug.Log("New! " + Index);
-    }
-    void testprint()
-    {
-        Debug.Log("Old " + Index);
-    }
-
     private IEnumerator DelayedDestruction()
     {
         yield return new WaitForSeconds(.5f);
@@ -92,23 +83,19 @@ public class Player : MonoBehaviour
         actions = new PlayerActions();
         actions.devices = GetComponent<PlayerInput>().devices;
 
-        actions.Lobby.Move.performed += OnMove;
-        actions.Lobby.Move.Enable();
+        actions.Gameplay.Move.performed += OnMove;
 
-        actions.Lobby.West.performed += OnWest;
-        actions.Lobby.West.Enable();
-        actions.Lobby.East.performed += OnEast;
-        actions.Lobby.East.Enable();
-        actions.Lobby.North.performed += OnNorth;
-        actions.Lobby.North.Enable();
-        actions.Lobby.South.performed += OnSouth;
-        actions.Lobby.South.Enable();
+        actions.Gameplay.West.performed += OnWest;
+        actions.Gameplay.East.performed += OnEast;
+        actions.Gameplay.North.performed += OnNorth;
+        actions.Gameplay.South.performed += OnSouth;
+
+        actions.Gameplay.Enable();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         if (onMove == null) return;
-        if (context.performed)
             onMove(context);
     }
     public void OnNorth(InputAction.CallbackContext context)
