@@ -19,14 +19,17 @@ public class Player : MonoBehaviour
     private GameObject hybridModel;
     public PlayerController Controller { get; private set; }
     
-    private PlayerActions actions;
+    private PlayerActions _inputControls;
+    public PlayerActions InputControls { get { return _inputControls; } }
 
     private void Start()
     {
         transform.SetParent(GameManager.Instance.transform);
-        GameManager.AddPlayer(this);
 
-        SetUpInput();
+        _inputControls = new PlayerActions();
+        _inputControls.devices = GetComponent<PlayerInput>().devices;
+
+        GameManager.AddPlayer(this);
     }
 
     public void SetController(PlayerController playerController)
@@ -62,73 +65,6 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
         Destroy(gameObject);
-    }
-
-    //------------------------INPUT------------------------//
-    //--Delegates--//
-    public delegate void OnInputValue(InputAction.CallbackContext context);
-    public delegate void OnInput();
-    public OnInputValue onMove;
-    public OnInput onNorth;
-    public OnInput onNorthUp;
-    public OnInput onEast;
-    public OnInput onEastUp;
-    public OnInput onSouth;
-    public OnInput onSouthUp;
-    public OnInput onWest;
-    public OnInput onWestUp;
-
-    private void SetUpInput()
-    {
-        actions = new PlayerActions();
-        actions.devices = GetComponent<PlayerInput>().devices;
-
-        actions.Gameplay.Move.performed += OnMove;
-
-        actions.Gameplay.West.performed += OnWest;
-        actions.Gameplay.East.performed += OnEast;
-        actions.Gameplay.North.performed += OnNorth;
-        actions.Gameplay.South.performed += OnSouth;
-
-        actions.Gameplay.Enable();
-    }
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        if (onMove == null) return;
-            onMove(context);
-    }
-    public void OnNorth(InputAction.CallbackContext context)
-    {
-        if (onNorth == null) return;
-        if (context.performed)
-            onNorth();
-        else if (context.canceled)
-            onNorthUp();
-    }
-    public void OnEast(InputAction.CallbackContext context)
-    {
-        if (onEast == null) return;
-        if (context.performed)
-            onEast();
-        else if (context.canceled)
-            onEastUp();
-    }
-    public void OnSouth(InputAction.CallbackContext context)
-    {
-        if (onSouth == null) return;
-        if (context.performed)
-            onSouth();
-        else if (context.canceled)
-            onSouthUp();
-    }
-    public void OnWest(InputAction.CallbackContext context)
-    {
-        if (onWest == null) return;
-        if (context.performed)
-            onWest();
-        else if (context.canceled)
-            onWestUp();
     }
 
 }

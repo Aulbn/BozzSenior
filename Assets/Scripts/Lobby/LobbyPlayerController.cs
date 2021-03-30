@@ -75,12 +75,12 @@ public class LobbyPlayerController : PlayerController
         _outfitList.AnimateButton(input.normalized);
     }
 
-    protected override void OnSouth()
+    protected override void OnSouth(InputAction.CallbackContext context)
     {
         ToggleReady(_readyToggle.Toggle());
     }
 
-    protected override void OnEast()
+    protected override void OnEast(InputAction.CallbackContext context)
     {
         if (!isReady)
         {
