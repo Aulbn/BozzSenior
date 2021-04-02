@@ -10,7 +10,7 @@ public abstract class PlayerController : MonoBehaviour
     private int inputLocks = 0;
 
     private Coroutine _delayedEnableCoroutine;
-    protected PlayerActions inputControls { get { return Player.InputControls; } }
+    protected PlayerActions InputControls { get { return Player.InputControls; } }
 
     public void SetPlayer(Player player)
     {
@@ -38,25 +38,25 @@ public abstract class PlayerController : MonoBehaviour
     private void ToggleInputLock(bool isLocked)
     {
         if (isLocked)
-            inputControls.Gameplay.Disable();
+            InputControls.Gameplay.Disable();
         else
-            inputControls.Gameplay.Enable();
+            InputControls.Gameplay.Enable();
     }
 
     private void OnEnable()
     {
         if (!Player) return;
 
-        inputControls.Gameplay.Move.performed += OnMove;
+        InputControls.Gameplay.Move.performed += OnMove;
 
-        inputControls.Gameplay.West.performed += OnWest;
-        inputControls.Gameplay.West.canceled += OnWestUp;
-        inputControls.Gameplay.East.performed += OnEast;
-        inputControls.Gameplay.East.canceled += OnEastUp;
-        inputControls.Gameplay.North.performed += OnNorth;
-        inputControls.Gameplay.North.canceled += OnNorthUp;
-        inputControls.Gameplay.South.performed += OnSouth;
-        inputControls.Gameplay.South.canceled += OnSouthUp;
+        InputControls.Gameplay.West.performed += OnWest;
+        InputControls.Gameplay.West.canceled += OnWestUp;
+        InputControls.Gameplay.East.performed += OnEast;
+        InputControls.Gameplay.East.canceled += OnEastUp;
+        InputControls.Gameplay.North.performed += OnNorth;
+        InputControls.Gameplay.North.canceled += OnNorthUp;
+        InputControls.Gameplay.South.performed += OnSouth;
+        InputControls.Gameplay.South.canceled += OnSouthUp;
 
         //Wait one frame with enabling
         if (_delayedEnableCoroutine != null)
@@ -66,16 +66,16 @@ public abstract class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         if (!Player) return;
-        inputControls.Gameplay.Move.performed -= OnMove;
+        InputControls.Gameplay.Move.performed -= OnMove;
 
-        inputControls.Gameplay.West.performed -= OnWest;
-        inputControls.Gameplay.West.canceled -= OnWestUp;
-        inputControls.Gameplay.East.performed -= OnEast;
-        inputControls.Gameplay.East.canceled -= OnEastUp;
-        inputControls.Gameplay.North.performed -= OnNorth;
-        inputControls.Gameplay.North.canceled -= OnNorthUp;
-        inputControls.Gameplay.South.performed -= OnSouth;
-        inputControls.Gameplay.South.canceled -= OnSouthUp;
+        InputControls.Gameplay.West.performed -= OnWest;
+        InputControls.Gameplay.West.canceled -= OnWestUp;
+        InputControls.Gameplay.East.performed -= OnEast;
+        InputControls.Gameplay.East.canceled -= OnEastUp;
+        InputControls.Gameplay.North.performed -= OnNorth;
+        InputControls.Gameplay.North.canceled -= OnNorthUp;
+        InputControls.Gameplay.South.performed -= OnSouth;
+        InputControls.Gameplay.South.canceled -= OnSouthUp;
     }
 
     private IEnumerator IEDelayedEnable()
@@ -83,7 +83,7 @@ public abstract class PlayerController : MonoBehaviour
         yield return 0; //Wait one frame
         if (Player && inputLocks < 1)
         {
-            inputControls.Gameplay.Enable();
+            InputControls.Gameplay.Enable();
             Debug.Log("Delayed Enable");
         }
     }
