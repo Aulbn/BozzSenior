@@ -83,6 +83,17 @@ public abstract class PlayerController : MonoBehaviour
         yield return 0; //Wait one frame
         if (Player && inputLocks < 1)
         {
+            //InputControls.Gameplay.Move.performed += OnMove;
+
+            //InputControls.Gameplay.West.performed += OnWest;
+            //InputControls.Gameplay.West.canceled += OnWestUp;
+            //InputControls.Gameplay.East.performed += OnEast;
+            //InputControls.Gameplay.East.canceled += OnEastUp;
+            //InputControls.Gameplay.North.performed += OnNorth;
+            //InputControls.Gameplay.North.canceled += OnNorthUp;
+            //InputControls.Gameplay.South.performed += OnSouth;
+            //InputControls.Gameplay.South.canceled += OnSouthUp;
+
             InputControls.Gameplay.Enable();
             Debug.Log("Delayed Enable");
         }

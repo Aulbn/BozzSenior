@@ -16,9 +16,6 @@ public class MultipleTargetCamera : MonoBehaviour
     private Vector3 velocity;
     private List<Transform> targets;
 
-    //private Vector3 _centerPoint;
-    //private float _greatestDistance;
-
     private void Awake()
     {
         Camera = GetComponent<Camera>();
@@ -26,13 +23,10 @@ public class MultipleTargetCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        //if (targets == null || targets.Count < 1) return;
         if (GameManager.Players == null || GameManager.Players.Length < 1) return;
 
         //Bounds
-        //Bounds bounds = new Bounds(targets[0].position, Vector3.zero);
         Bounds bounds = new Bounds(GameManager.Players[0].Controller.transform.position, Vector3.zero);
-        //foreach (Transform t in targets)
         foreach (Player p in GameManager.Players)
         {
             bounds.Encapsulate(p.Controller.transform.position);
@@ -45,17 +39,6 @@ public class MultipleTargetCamera : MonoBehaviour
         float newZoom = Mathf.Lerp(minMaxFoV.x, minMaxFoV.y, bounds.size.x / 4);
         Camera.fieldOfView = Mathf.Lerp(Camera.fieldOfView, newZoom, Time.deltaTime * zoomSpeed);
     }
-
-    //private Vector3 GetCenterPoint()
-    //{
-    //    Bounds bounds = new Bounds(targets[0].position, Vector3.zero);
-    //    foreach(Transform t in targets)
-    //    {
-    //        bounds.Encapsulate(t.position);
-    //    }
-
-    //    return bounds.center;
-    //}
 
     public void AddTarget(Transform transform)
     {

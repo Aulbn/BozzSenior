@@ -30,6 +30,7 @@ public class Lobby : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput player)
     {
+        player.GetComponent<Player>().Init();
         LobbyPlayerController pc = Instantiate(lobbyPlayerControllerPrefab, spawnPoints[GameManager.Players.Length]).GetComponent<LobbyPlayerController>();
         ToggleSwitch readySwitch = Instantiate(readyTogglePrefab, contentHolder).GetComponent<ToggleSwitch>();
         //_readySwitches.Add(readySwitch);

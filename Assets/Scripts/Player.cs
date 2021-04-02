@@ -22,14 +22,24 @@ public class Player : MonoBehaviour
     private PlayerActions _inputControls;
     public PlayerActions InputControls { get { return _inputControls; } }
 
+    private bool _hasInitialized;
+
     private void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        if (_hasInitialized) return;
         transform.SetParent(GameManager.Instance.transform);
 
         _inputControls = new PlayerActions();
         _inputControls.devices = GetComponent<PlayerInput>().devices;
 
         GameManager.AddPlayer(this);
+
+        _hasInitialized = true;
     }
 
     public void SetController(PlayerController playerController)
