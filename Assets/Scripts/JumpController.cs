@@ -14,7 +14,7 @@ public class JumpController : PlayerController
 
     [Space]
     public Renderer _renderer;
-    public Transform hybridModelParent;
+    //public Transform hybridModelParent;
 
     private Coroutine MoveCoroutine;
     private bool isMoving = false;

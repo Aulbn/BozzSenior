@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
 {
+    public Transform hybridModelParent;
     public Player Player { get; private set; }
     public bool HasControl { get { return inputLocks == 0; } }
     private int inputLocks = 0;
@@ -17,6 +18,21 @@ public abstract class PlayerController : MonoBehaviour
         OnDisable();
         Player = player;
         OnEnable();
+    }
+    public void SetHybridModel()
+    {
+        if (!Player || !hybridModelParent) return;
+        if (Player.HasHybridModel)
+        {
+            foreach (Transform child in hybridModelParent)
+            {
+                Destroy(child.gameObject);
+            }
+            Player.GetHybridModelCopy(hybridModelParent).gameObject.SetActive(true);
+        }
+        else
+            hybridModelParent.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", Player.color);
+
     }
 
     public void AddInputLock()
@@ -83,17 +99,6 @@ public abstract class PlayerController : MonoBehaviour
         yield return 0; //Wait one frame
         if (Player && inputLocks < 1)
         {
-            //InputControls.Gameplay.Move.performed += OnMove;
-
-            //InputControls.Gameplay.West.performed += OnWest;
-            //InputControls.Gameplay.West.canceled += OnWestUp;
-            //InputControls.Gameplay.East.performed += OnEast;
-            //InputControls.Gameplay.East.canceled += OnEastUp;
-            //InputControls.Gameplay.North.performed += OnNorth;
-            //InputControls.Gameplay.North.canceled += OnNorthUp;
-            //InputControls.Gameplay.South.performed += OnSouth;
-            //InputControls.Gameplay.South.canceled += OnSouthUp;
-
             InputControls.Gameplay.Enable();
             Debug.Log("Delayed Enable");
         }

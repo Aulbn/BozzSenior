@@ -18,9 +18,7 @@ public class Player : MonoBehaviour
     public bool HasHybridModel { get { return hybridModel != null; } }
     private GameObject hybridModel;
     public PlayerController Controller { get; private set; }
-    
-    private PlayerActions _inputControls;
-    public PlayerActions InputControls { get { return _inputControls; } }
+    public PlayerActions InputControls { get; private set; }
 
     private bool _hasInitialized;
 
@@ -34,8 +32,8 @@ public class Player : MonoBehaviour
         if (_hasInitialized) return;
         transform.SetParent(GameManager.Instance.transform);
 
-        _inputControls = new PlayerActions();
-        _inputControls.devices = GetComponent<PlayerInput>().devices;
+        InputControls = new PlayerActions();
+        InputControls.devices = GetComponent<PlayerInput>().devices;
 
         GameManager.AddPlayer(this);
 

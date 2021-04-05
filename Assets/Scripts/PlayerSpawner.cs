@@ -24,6 +24,7 @@ public class PlayerSpawner : MonoBehaviour
         PlayerController pc = Instantiate(playerPrefab, spawnPoints[Mathf.Clamp(player.Index, 0, spawnPoints.Length-1)].position, Quaternion.identity).GetComponent<PlayerController>();
         player.SetController(pc);
         pc.SetPlayer(player);
+        pc.SetHybridModel();
 
         //spawnPoints[player.Index].MoveToPosition((MoveController)pc);
         //pc.transform.position = spawnPoints[player.Index].position;
