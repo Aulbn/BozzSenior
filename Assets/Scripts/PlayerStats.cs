@@ -29,20 +29,4 @@ public class PlayerStats : MonoBehaviour
         score += points;
         //Set score in scoreboard, as well
     }
-
-    //public float zoomSpeed;
-    //private Vector3 newPos;
-
-
-    //private void Awake()
-    //{
-    //    newPos = transform.position;
-    //}
-
-    //public void ZoomUpdate()
-    //{
-    //    newPos += transform.forward * Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime;
-    //    transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * zoomSpeed);
-    //}
-
 }
