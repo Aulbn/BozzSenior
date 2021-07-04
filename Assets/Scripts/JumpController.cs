@@ -9,15 +9,16 @@ public class JumpController : PlayerController
 
     public PlayerPosition[] positions;
     public float transitionTime = 1;
-    public float jumpCooldown;
+    public float JumpCooldown;
     public AnimationCurve jumpCurve, speedCurve;
 
     [Space]
-    public Renderer _renderer;
+    public Renderer Renderer;
+    public Animator Animator;
     //public Transform hybridModelParent;
 
-    private Coroutine MoveCoroutine;
-    private bool isMoving = false;
+    private Coroutine _MoveCoroutine;
+    private bool _IsMoving = false;
 
     protected override void OnSouth(InputAction.CallbackContext context) {MoveToPosition(0);}
     protected override void OnWest(InputAction.CallbackContext context) {MoveToPosition(1);}
@@ -27,7 +28,7 @@ public class JumpController : PlayerController
 
     private void Start()
     {
-        _renderer.material.SetColor("_BaseColor", Player.color);
+        Renderer.material.SetColor("_BaseColor", Player.color);
 
         if (Player.HasHybridModel)
         {
@@ -41,31 +42,44 @@ public class JumpController : PlayerController
 
     public void MoveToPosition(int positionIndex)
     {
-        if (!isMoving && !positions[positionIndex].Contains(this))
-            MoveCoroutine = StartCoroutine(IEMoveToPosition(positionIndex));
+        if (!_IsMoving && !positions[positionIndex].Contains(this))
+            _MoveCoroutine = StartCoroutine(IEMoveToPosition(positionIndex));
     } 
     
     private IEnumerator IEMoveToPosition(int destinationIndex)
     {
-        isMoving = true;
+        _IsMoving = true;
 
         float transition = 0;
         Vector3 startPos = transform.position;
-        float value = transition / transitionTime;
+        float yValue;
+        float lastYValue = 0;
+        Vector3 direction = positions[destinationIndex].position.Flattened() - transform.position.Flattened();
+        float rotationSpeed = 10f;
+
+        Animator.SetTrigger("Jump");
+        Animator.SetBool("IsAirborn", true);
 
         while (transition < transitionTime)
         {
+            transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, direction, Time.deltaTime * rotationSpeed, 0f), Vector3.up);
+            transition += Time.deltaTime;
+            float value = transition / transitionTime;
+            yValue = jumpCurve.Evaluate(speedCurve.Evaluate(value));
+
             transform.position = Vector3.Lerp(startPos, positions[destinationIndex].GetMultiPosition(this), speedCurve.Evaluate(value));
-            transform.position = new Vector3(transform.position.x, transform.position.y * jumpCurve.Evaluate(speedCurve.Evaluate(value)), transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y * yValue, transform.position.z);
+
+            Animator.SetFloat("YVelocity", (yValue - lastYValue) * 100);
+            lastYValue = yValue;
 
             yield return new WaitForEndOfFrame();
-            transition += Time.deltaTime;
-            value = transition / transitionTime;
         }
         transform.position = positions[destinationIndex].GetMultiPosition(this);
-        
-        yield return new WaitForSecondsRealtime(jumpCooldown);
-        isMoving = false;
+        Animator.SetBool("IsAirborn", false);
+
+        yield return new WaitForSecondsRealtime(JumpCooldown);
+        _IsMoving = false;
     }
 
     public override void OnDeath()

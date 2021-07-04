@@ -61,13 +61,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d556e95a402bc04ab2af166cfbf3c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hybridModelParent: {fileID: 7438914565275311322}
   positions:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   transitionTime: 0.5
-  jumpCooldown: 0.3
+  JumpCooldown: 0.3
   jumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -90,8 +91,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.35945907
     - serializedVersion: 3
-      time: 0.66
-      value: 1.5
+      time: 0.53969926
+      value: 1.5136068
       inSlope: -0.4956493
       outSlope: -0.4956493
       tangentMode: 0
@@ -101,8 +102,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: -1.4705883
-      outSlope: -1.4705883
+      inSlope: -1.1158069
+      outSlope: -1.1158069
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -134,8 +135,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _renderer: {fileID: 8259816214760910339}
-  hybridModelParent: {fileID: 7438914565275311322}
+  Renderer: {fileID: 8259816214760910339}
+  Animator: {fileID: 7394683864842175078}
 --- !u!114 &-8088675478383067213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +297,12 @@ PrefabInstance:
 --- !u!4 &3494543856375355420 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 01884858c74bb004c82af9cd30dde696,
+    type: 3}
+  m_PrefabInstance: {fileID: 4032309782831153143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7394683864842175078 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 01884858c74bb004c82af9cd30dde696,
     type: 3}
   m_PrefabInstance: {fileID: 4032309782831153143}
   m_PrefabAsset: {fileID: 0}
