@@ -25,7 +25,7 @@ public abstract class PlayerController : MonoBehaviour
         if (!Player || !HybridModelParent) return;
         if (!Player.HasHybridModel) //If none, save the one in controller
         {
-            GameObject hybrid = HybridModelParent.GetChild(0).gameObject;
+            GameObject hybrid = HybridModelParent.GetComponentInChildren<HybridModel>().gameObject;
             hybrid.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", Player.color);
             Player.SaveHybridModel(hybrid);
         }
