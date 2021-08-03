@@ -46,7 +46,7 @@ public class CustomPlayerController : PlayerController
 
     protected void Start()
     {
-        SetHybridModel();
+        SpawnHybridModel();
         onStart.Invoke();
     }
 

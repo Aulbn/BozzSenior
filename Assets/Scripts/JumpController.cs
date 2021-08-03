@@ -12,11 +12,6 @@ public class JumpController : PlayerController
     public float JumpCooldown;
     public AnimationCurve jumpCurve, speedCurve;
 
-    [Space]
-    public Renderer Renderer;
-    public Animator Animator;
-    //public Transform hybridModelParent;
-
     private Coroutine _MoveCoroutine;
     private bool _IsMoving = false;
 
@@ -28,16 +23,7 @@ public class JumpController : PlayerController
 
     private void Start()
     {
-        Renderer.material.SetColor("_BaseColor", Player.color);
 
-        if (Player.HasHybridModel)
-        {
-            foreach (Transform child in hybridModelParent)
-            {
-                Destroy(child.gameObject);
-            }
-            Player.GetHybridModelCopy(hybridModelParent).gameObject.SetActive(true);
-        }
     }
 
     public void MoveToPosition(int positionIndex)
@@ -57,8 +43,8 @@ public class JumpController : PlayerController
         Vector3 direction = positions[destinationIndex].position.Flattened() - transform.position.Flattened();
         float rotationSpeed = 10f;
 
-        Animator.SetTrigger("Jump");
-        Animator.SetBool("IsAirborn", true);
+        HybridModel.Animator.SetTrigger("Jump");
+        HybridModel.Animator.SetBool("IsAirborn", true);
 
         while (transition < transitionTime)
         {
@@ -70,13 +56,13 @@ public class JumpController : PlayerController
             transform.position = Vector3.Lerp(startPos, positions[destinationIndex].GetMultiPosition(this), speedCurve.Evaluate(value));
             transform.position = new Vector3(transform.position.x, transform.position.y * yValue, transform.position.z);
 
-            Animator.SetFloat("YVelocity", (yValue - lastYValue) * 100);
+            HybridModel.Animator.SetFloat("YVelocity", (yValue - lastYValue) * 60);
             lastYValue = yValue;
 
             yield return new WaitForEndOfFrame();
         }
         transform.position = positions[destinationIndex].GetMultiPosition(this);
-        Animator.SetBool("IsAirborn", false);
+        HybridModel.Animator.SetBool("IsAirborn", false);
 
         yield return new WaitForSecondsRealtime(JumpCooldown);
         _IsMoving = false;

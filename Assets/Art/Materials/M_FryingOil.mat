@@ -78,7 +78,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Alpha: 0.767
+    - Alpha: 0.894
     - Alpha_1: 1
     - FoamAmount: 0
     - FoamEdge: 1

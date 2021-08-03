@@ -111,6 +111,16 @@ public class PlayerPosition : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(transform.position, transform.forward);
+        Gizmos.color = Color.green;
+        if (positionType == PositionType.Multiple)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Gizmos.DrawRay(GetMultiPosition(i), Vector3.up);
+            }
+        }
+        else
+            Gizmos.DrawRay(transform.position, transform.up);
     }
 
 }

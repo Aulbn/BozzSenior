@@ -5,13 +5,14 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerController : MonoBehaviour
 {
-    public Transform hybridModelParent;
+    public Transform HybridModelParent;
     public Player Player { get; private set; }
     public bool HasControl { get { return inputLocks == 0; } }
     private int inputLocks = 0;
 
     private Coroutine _delayedEnableCoroutine;
     protected PlayerActions InputControls { get { return Player.InputControls; } }
+    public HybridModel HybridModel { get; private set; }
 
     public void SetPlayer(Player player)
     {
@@ -19,20 +20,23 @@ public abstract class PlayerController : MonoBehaviour
         Player = player;
         OnEnable();
     }
-    public void SetHybridModel()
+    public void SpawnHybridModel()
     {
-        if (!Player || !hybridModelParent) return;
-        if (Player.HasHybridModel)
+        if (!Player || !HybridModelParent) return;
+        if (!Player.HasHybridModel) //If none, save the one in controller
         {
-            foreach (Transform child in hybridModelParent)
-            {
-                Destroy(child.gameObject);
-            }
-            Player.GetHybridModelCopy(hybridModelParent).gameObject.SetActive(true);
+            GameObject hybrid = HybridModelParent.GetChild(0).gameObject;
+            hybrid.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", Player.color);
+            Player.SaveHybridModel(hybrid);
         }
-        else
-            hybridModelParent.GetComponentInChildren<Renderer>().material.SetColor("_BaseColor", Player.color);
 
+        foreach (Transform child in HybridModelParent) //Clear controller of meshes
+        {
+            Destroy(child.gameObject);
+        }
+        HybridModel = Player.GetHybridModelCopy(HybridModelParent); //Spawn hybrid model
+        HybridModel.gameObject.SetActive(true);
+        
     }
 
     public void AddInputLock()

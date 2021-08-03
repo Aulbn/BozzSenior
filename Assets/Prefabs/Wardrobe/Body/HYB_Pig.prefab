@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyRenderer: {fileID: 6507227013871854840}
   hatParent: {fileID: 242970435823721483}
-  animator: {fileID: 5652477817188157597}
+  Animator: {fileID: 5652477817188157597}
 --- !u!1 &9144305985956648680
 GameObject:
   m_ObjectHideFlags: 0

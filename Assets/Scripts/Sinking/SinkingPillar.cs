@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class SinkingPillar : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class SinkingPillar : MonoBehaviour
     public float riseSpeed;
 
     public bool isActive = true;
+
+    public VisualEffect BoilingVFX;
 
     private int nPlayers;
     private Vector3 originPos;
@@ -29,6 +32,19 @@ public class SinkingPillar : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, originPos, riseSpeed * Time.deltaTime);
         }
+
+        if ( BoilingVFX != null)
+        {
+            if (transform.position.y < 0.5f)
+            {
+                BoilingVFX.SetInt("Spawn Rate", 500);
+            }
+            else
+            {
+                BoilingVFX.SetInt("Spawn Rate", 0);
+            }
+        }
+
     }
 
     public void OnTriggerEnter(Collider other)

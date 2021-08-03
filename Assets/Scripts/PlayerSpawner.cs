@@ -21,10 +21,12 @@ public class PlayerSpawner : MonoBehaviour
 
     public void SpawnPlayer(Player player)
     {
-        PlayerController pc = Instantiate(playerPrefab, spawnPoints[Mathf.Clamp(player.Index, 0, spawnPoints.Length-1)].position, Quaternion.identity).GetComponent<PlayerController>();
+        PlayerController pc = Instantiate(playerPrefab, spawnPoints[Mathf.Min(player.Index, spawnPoints.Length-1)].position, Quaternion.identity).GetComponent<PlayerController>();
         player.SetController(pc);
         pc.SetPlayer(player);
-        pc.SetHybridModel();
+        pc.SpawnHybridModel();
+
+        pc.transform.position = spawnPoints[Mathf.Min(player.Index, spawnPoints.Length - 1)].GetMultiPosition(pc);
 
         //spawnPoints[player.Index].MoveToPosition((MoveController)pc);
         //pc.transform.position = spawnPoints[player.Index].position;

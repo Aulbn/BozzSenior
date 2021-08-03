@@ -227,6 +227,7 @@ MonoBehaviour:
   sinkSpeedMultiplier: 1
   riseSpeed: 3
   isActive: 1
+  BoilingVFX: {fileID: 0}
 --- !u!65 &7428764674922954549
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -387,7 +388,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8414876963607177980}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.87}
+  m_LocalPosition: {x: 0, y: 0, z: -1.883}
   m_LocalScale: {x: 0.02, y: 0.02, z: 1}
   m_Children:
   - {fileID: 3828185761385767754}
@@ -620,6 +621,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 22c635930433b8a40a48640f0a78ff86,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4ac8df4098ef91746a002d243117d02d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 22c635930433b8a40a48640f0a78ff86,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41fd0690078486342b10f1773d896d5f, type: 2}
     - target: {fileID: 919132149155446097, guid: 22c635930433b8a40a48640f0a78ff86,
         type: 3}
       propertyPath: m_Name
