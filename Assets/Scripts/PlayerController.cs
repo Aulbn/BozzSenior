@@ -104,7 +104,7 @@ public abstract class PlayerController : MonoBehaviour
         if (Player && inputLocks < 1)
         {
             InputControls.Gameplay.Enable();
-            Debug.Log("Delayed Enable");
+            //Debug.Log("Delayed Enable");
         }
     }
 

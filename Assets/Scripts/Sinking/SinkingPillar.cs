@@ -51,7 +51,7 @@ public class SinkingPillar : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.transform.parent != transform)
         {
-            nPlayers++;
+            ++nPlayers;
             other.transform.SetParent(transform);
         }
     }
@@ -60,8 +60,9 @@ public class SinkingPillar : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            nPlayers--;
-            other.transform.parent = null;
+            --nPlayers;
+            if (other.transform.parent.Equals(transform))
+                other.transform.parent = null;
         }
     }
 

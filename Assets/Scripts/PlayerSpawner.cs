@@ -26,7 +26,8 @@ public class PlayerSpawner : MonoBehaviour
         pc.SetPlayer(player);
         pc.SpawnHybridModel();
 
-        pc.transform.position = spawnPoints[Mathf.Min(player.Index, spawnPoints.Length - 1)].GetMultiPosition(pc);
+        spawnPoints[Mathf.Min(player.Index, spawnPoints.Length - 1)].GetAndBookPosition(pc, out var pos);
+        pc.transform.position = pos;
 
         //spawnPoints[player.Index].MoveToPosition((MoveController)pc);
         //pc.transform.position = spawnPoints[player.Index].position;

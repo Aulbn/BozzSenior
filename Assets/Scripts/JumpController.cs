@@ -42,6 +42,7 @@ public class JumpController : PlayerController
         float lastYValue = 0;
         Vector3 direction = positions[destinationIndex].position.Flattened() - transform.position.Flattened();
         float rotationSpeed = 10f;
+        Vector3 destination;
 
         HybridModel.Animator.SetTrigger("Jump");
         HybridModel.Animator.SetBool("IsAirborn", true);
@@ -53,7 +54,8 @@ public class JumpController : PlayerController
             float value = transition / transitionTime;
             yValue = jumpCurve.Evaluate(speedCurve.Evaluate(value));
 
-            transform.position = Vector3.Lerp(startPos, positions[destinationIndex].GetMultiPosition(this), speedCurve.Evaluate(value));
+            positions[destinationIndex].GetAndBookPosition(this, out destination);
+            transform.position = Vector3.Lerp(startPos, destination, speedCurve.Evaluate(value));
             transform.position = new Vector3(transform.position.x, transform.position.y * yValue, transform.position.z);
 
             HybridModel.Animator.SetFloat("YVelocity", (yValue - lastYValue) * 60);
@@ -61,7 +63,8 @@ public class JumpController : PlayerController
 
             yield return new WaitForEndOfFrame();
         }
-        transform.position = positions[destinationIndex].GetMultiPosition(this);
+        positions[destinationIndex].GetAndBookPosition(this, out destination);
+        transform.position = destination;
         HybridModel.Animator.SetBool("IsAirborn", false);
 
         yield return new WaitForSecondsRealtime(JumpCooldown);
