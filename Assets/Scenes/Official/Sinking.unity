@@ -7714,8 +7714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49d44d955426b34d975585c65962bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PositionType: 0
-  offset: 0.5
+  PositionType: 1
+  offset: 1
 --- !u!4 &1113968863
 Transform:
   m_ObjectHideFlags: 0
@@ -7723,13 +7723,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113968861}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 5.69, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1303694384}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1166238621
 GameObject:
   m_ObjectHideFlags: 0
@@ -8027,10 +8027,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78483a75620a1424484ba4fba5ee4d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnTime: 1
-  spawnPoints:
+  RespawnTime: 0
+  SpawnPoints:
   - {fileID: 1113968862}
-  playerPrefab: {fileID: 893332016853037665, guid: 589def01d4227df4499e3b43ab32c1c8,
+  PlayerPrefab: {fileID: 893332016853037665, guid: 589def01d4227df4499e3b43ab32c1c8,
     type: 3}
 --- !u!4 &1303694384
 Transform:

@@ -23,7 +23,7 @@ public class BoxSurprise : MonoBehaviour
             mc.positions = new PlayerPosition[4];
             for (int i = 0; i < 4; i++)
             {
-                mc.positions[i] = spawner.spawnPoints[i];
+                mc.positions[i] = spawner.SpawnPoints[i];
             }
         }
         StartGame();

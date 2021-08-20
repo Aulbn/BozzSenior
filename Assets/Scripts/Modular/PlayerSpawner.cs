@@ -6,10 +6,10 @@ public class PlayerSpawner : MonoBehaviour
 {
     private static PlayerSpawner Instance;
 
-    public float respawnTime;
+    public float RespawnTime;
     [Space]
-    public PlayerPosition[] spawnPoints;
-    public PlayerController playerPrefab;
+    public PlayerPosition[] SpawnPoints;
+    public PlayerController PlayerPrefab;
 
     //public List<PlayerController> playerControllers = new List<PlayerController>();
 
@@ -21,12 +21,14 @@ public class PlayerSpawner : MonoBehaviour
 
     public void SpawnPlayer(Player player)
     {
-        PlayerController pc = Instantiate(playerPrefab, spawnPoints[Mathf.Min(player.Index, spawnPoints.Length-1)].position, Quaternion.identity).GetComponent<PlayerController>();
+        int spawnPointIndex = Mathf.Min(player.Index, SpawnPoints.Length - 1);
+        PlayerController pc = Instantiate(PlayerPrefab, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].transform.rotation).GetComponent<PlayerController>();
+        pc.gameObject.SetActive(true);
         player.SetController(pc);
         pc.SetPlayer(player);
         pc.SpawnHybridModel();
 
-        spawnPoints[Mathf.Min(player.Index, spawnPoints.Length - 1)].GetAndBookPosition(pc, out var pos);
+        SpawnPoints[Mathf.Min(player.Index, SpawnPoints.Length - 1)].GetAndBookPosition(pc, out var pos);
         pc.transform.position = pos;
 
         //spawnPoints[player.Index].MoveToPosition((MoveController)pc);
@@ -48,14 +50,14 @@ public class PlayerSpawner : MonoBehaviour
     }
     public static void RespawnPlayer(PlayerController playerController)
     {
-        Instance.StartCoroutine(Instance.IERespawnPlayer(playerController, Instance.respawnTime));
+        Instance.StartCoroutine(Instance.IERespawnPlayer(playerController, Instance.RespawnTime));
     }
     private IEnumerator IERespawnPlayer(PlayerController playerController, float respawnTime)
     {
         playerController.transform.Translate(Vector3.up * 10000);
         playerController.enabled = false;
         yield return new WaitForSecondsRealtime(respawnTime);
-        playerController.transform.position = spawnPoints[Mathf.Clamp(playerController.Player.Index, 0, spawnPoints.Length-1)].position;
+        playerController.transform.position = SpawnPoints[Mathf.Clamp(playerController.Player.Index, 0, SpawnPoints.Length-1)].position;
         playerController.enabled = true;
     }
 }

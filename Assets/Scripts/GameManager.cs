@@ -85,4 +85,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static void TogglePlayerControllerInput(bool enableMovement)
+    {
+        foreach (PlayerController c in Controllers)
+        {
+            if (enableMovement)
+                c.RemoveInputLock();
+            else
+                c.AddInputLock();
+        }
+    }
+
 }
