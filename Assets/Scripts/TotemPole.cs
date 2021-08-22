@@ -7,12 +7,17 @@ public class TotemPole : PlayerController
 {
     public Transform TotemPoleParent;
     public GameObject[] TotemPrefabs;
+    public ParticleSystem StunFx;
+    public ParticleSystem BreakFx;
+
+    [Header("Debug")]
+    public Color[] IndexColors;
 
     private Queue<int> QueuedInputs = new Queue<int>();
     private Queue<Totem> QueuedTotems = new Queue<Totem>();
 
     private Vector3 _TotemPoleTargetPosition;
-
+    private GameBrain_TotemPoles _GameBrain;
     private struct Totem
     {
         public int Index;
@@ -32,8 +37,9 @@ public class TotemPole : PlayerController
 
     private void Start()
     {
-        CreateTotemQueue(25);
-        FindObjectOfType<GameBrain_TotemPoles>().AddTotemPole(this);
+        _GameBrain = FindObjectOfType<GameBrain_TotemPoles>();
+        _GameBrain.AddTotemPole(this);
+        CreateTotemQueue(_GameBrain.NTotems);
         _TotemPoleTargetPosition = TotemPoleParent.position;
     }
 
@@ -61,8 +67,8 @@ public class TotemPole : PlayerController
                     Debug.Log("Correct!");
                     hasScored = true;
                     Destroy(QueuedTotems.Dequeue().gameObject);
-                    //Move down other totems
-                    _TotemPoleTargetPosition += Vector3.down * .52f;
+                    BreakFx.Play();
+                    _TotemPoleTargetPosition += Vector3.down * .52f; //Move down other totems
                 }
                 else
                 {
@@ -70,12 +76,19 @@ public class TotemPole : PlayerController
                     Debug.Log("Stun!");
                     QueuedInputs.Clear();
                     AddInputLock();
+                    StunFx.gameObject.SetActive(true);
+                    StunFx.Play();
                     yield return new WaitForSeconds(stunTime);
                     RemoveInputLock();
+                    StunFx.gameObject.SetActive(false);
+                    //StunFx.Stop();
                 }
             }
             yield return new WaitForEndOfFrame();
         }
+
+        _GameBrain.RegisterFinish();
+
     }
 
     protected override void OnSouth(InputAction.CallbackContext context)
@@ -100,7 +113,7 @@ public class TotemPole : PlayerController
         int randomInput;
         for (int i = 0; i < nTotems; i++)
         {
-            randomInput = Random.Range(0, 3);
+            randomInput = Random.Range(0, 4);
             GameObject totemGO = Instantiate(TotemPrefabs[randomInput], TotemPrefabs[0].transform.position + Vector3.up * i * .52f, TotemPrefabs[0].transform.rotation, TotemPoleParent);
             QueuedTotems.Enqueue(new Totem(randomInput, totemGO));
             totemGO.SetActive(true);
