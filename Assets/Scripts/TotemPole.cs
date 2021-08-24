@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class TotemPole : PlayerController
 {
@@ -9,9 +10,12 @@ public class TotemPole : PlayerController
     public GameObject[] TotemPrefabs;
     public ParticleSystem StunFx;
     public ParticleSystem BreakFx;
+    public ParticleSystem FinishFX;
+    public TextMeshProUGUI ScoreText;
 
     [Header("Debug")]
     public Color[] IndexColors;
+    public Color[] PrizeColors;
 
     private Queue<int> QueuedInputs = new Queue<int>();
     private Queue<Totem> QueuedTotems = new Queue<Totem>();
@@ -41,26 +45,31 @@ public class TotemPole : PlayerController
         _GameBrain.AddTotemPole(this);
         CreateTotemQueue(_GameBrain.NTotems);
         _TotemPoleTargetPosition = TotemPoleParent.position;
+        ScoreText.text = "";
     }
 
     private void Update()
     {
-        TotemPoleParent.position = Vector3.Lerp(TotemPoleParent.position, _TotemPoleTargetPosition, Time.deltaTime * 5f);
+        TotemPoleParent.position = Vector3.Lerp(TotemPoleParent.position, _TotemPoleTargetPosition, Time.deltaTime * 5f * (1 + QueuedInputs.Count * _GameBrain.SpeedMultiplier));
     }
 
     private IEnumerator IEUpdate(float cooldownTime, float stunTime)
     {
         bool hasScored = false;
+        float speedMultiplier = 1;
 
         while(QueuedTotems.Count > 0)
         {
+            speedMultiplier = 1 + QueuedInputs.Count * _GameBrain.SpeedMultiplier;
             if (hasScored)
             {
-                yield return new WaitForSeconds(cooldownTime);
+                yield return new WaitForSeconds(cooldownTime / speedMultiplier);
                 hasScored = false;
             }
             if (QueuedInputs.Count > 0)
             {
+                HybridModel.Animator.Play("Headbutt");
+                yield return new WaitForSeconds(.25f);
                 if (QueuedInputs.Dequeue() == QueuedTotems.Peek().Index)
                 {
                     //Same! Remove totem
@@ -78,17 +87,22 @@ public class TotemPole : PlayerController
                     AddInputLock();
                     StunFx.gameObject.SetActive(true);
                     StunFx.Play();
+                    HybridModel.Animator.Play("Stunned");
+
                     yield return new WaitForSeconds(stunTime);
+
+                    HybridModel.Animator.Play("Null", 1);
                     RemoveInputLock();
                     StunFx.gameObject.SetActive(false);
-                    //StunFx.Stop();
                 }
             }
             yield return new WaitForEndOfFrame();
         }
 
-        _GameBrain.RegisterFinish();
-
+        int score = _GameBrain.RegisterFinish();
+        FinishFX.Play();
+        ScoreText.text = score.ToString();
+        ScoreText.color = PrizeColors[score-1];
     }
 
     protected override void OnSouth(InputAction.CallbackContext context)
