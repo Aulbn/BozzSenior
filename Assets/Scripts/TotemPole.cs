@@ -68,7 +68,7 @@ public class TotemPole : PlayerController
             }
             if (QueuedInputs.Count > 0)
             {
-                HybridModel.Animator.Play("Headbutt");
+                HybridModel.AnimationHandler.PlayAnimation("Headbutt");
                 yield return new WaitForSeconds(.25f);
                 if (QueuedInputs.Dequeue() == QueuedTotems.Peek().Index)
                 {
@@ -82,16 +82,16 @@ public class TotemPole : PlayerController
                 else
                 {
                     //Not same! Stun!
-                    Debug.Log("Stun!");
+                    //Debug.Log("Stun!");
                     QueuedInputs.Clear();
                     AddInputLock();
                     StunFx.gameObject.SetActive(true);
                     StunFx.Play();
-                    HybridModel.Animator.Play("Stunned");
+                    HybridModel.AnimationHandler.PlayAnimation("Stunned");
 
                     yield return new WaitForSeconds(stunTime);
 
-                    HybridModel.Animator.Play("Null", 1);
+                    HybridModel.AnimationHandler.StopAnimaiton();
                     RemoveInputLock();
                     StunFx.gameObject.SetActive(false);
                 }

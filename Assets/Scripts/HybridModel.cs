@@ -6,6 +6,6 @@ public class HybridModel : MonoBehaviour
 {
     public Renderer bodyRenderer;
     public Transform hatParent;
-    public Animator Animator;
+    public HybridAnimationHandler AnimationHandler;
 
 }

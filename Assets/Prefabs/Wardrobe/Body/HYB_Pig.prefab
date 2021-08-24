@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2241445753706327509}
   - component: {fileID: 2241445753706327510}
+  - component: {fileID: -8887797111567756462}
   m_Layer: 0
   m_Name: HYB_Pig
   m_TagString: Untagged
@@ -46,6 +47,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyRenderer: {fileID: 6507227013871854840}
   hatParent: {fileID: 242970435823721483}
+  AnimationHandler: {fileID: -8887797111567756462}
+--- !u!114 &-8887797111567756462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241445753706327511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe90a50eee0dbc64e99ebcda7f40a69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationCollection: {fileID: 11400000, guid: d1a7bb9447118c74c9c5d580fb4550db,
+    type: 2}
   Animator: {fileID: 5652477817188157597}
 --- !u!1 &9144305985956648680
 GameObject:
