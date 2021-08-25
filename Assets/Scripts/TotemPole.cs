@@ -73,7 +73,6 @@ public class TotemPole : PlayerController
                 if (QueuedInputs.Dequeue() == QueuedTotems.Peek().Index)
                 {
                     //Same! Remove totem
-                    Debug.Log("Correct!");
                     hasScored = true;
                     Destroy(QueuedTotems.Dequeue().gameObject);
                     BreakFx.Play();
@@ -82,7 +81,6 @@ public class TotemPole : PlayerController
                 else
                 {
                     //Not same! Stun!
-                    //Debug.Log("Stun!");
                     QueuedInputs.Clear();
                     AddInputLock();
                     StunFx.gameObject.SetActive(true);
