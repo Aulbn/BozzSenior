@@ -112,6 +112,9 @@ public class LobbyPlayerController : PlayerController
     private void UpdateColor()
     {
         _renderer.material.SetColor("_BaseColor", colors[colorIndex]);
+        //Set playstation gamepad color (don't know if it works)
+        var gamepad = (UnityEngine.InputSystem.DualShock.DualShockGamepad)Gamepad.all[Player.Index];
+        gamepad.SetLightBarColor(colors[colorIndex]);
     }
     public void SaveHybridCharacter()
     {

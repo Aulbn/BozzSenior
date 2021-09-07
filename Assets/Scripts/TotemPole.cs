@@ -97,7 +97,7 @@ public class TotemPole : PlayerController
             yield return new WaitForEndOfFrame();
         }
 
-        int score = _GameBrain.RegisterFinish();
+        int score = _GameBrain.RegisterFinish(Player);
         FinishFX.Play();
         ScoreText.text = score.ToString();
         ScoreText.color = PrizeColors[score-1];

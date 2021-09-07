@@ -10,7 +10,7 @@ public class GameBrain_TotemPoles : MonoBehaviour
     public float SpeedMultiplier;
 
     private List<TotemPole> _TotemPoles = new List<TotemPole>();
-    private int _NFinishedPlayers = 0;
+    private List<Player> _FinishedPlayers = new List<Player>();
 
     public void StartGame()
     {
@@ -31,17 +31,18 @@ public class GameBrain_TotemPoles : MonoBehaviour
         GameManager.TogglePlayerControllerInput(enable);
     }
 
-    public int RegisterFinish()
+    public int RegisterFinish(Player player)
     {
-        _NFinishedPlayers++;
+        _FinishedPlayers.Add(player);
         Debug.Log("Register finish");
-        if (_NFinishedPlayers == _TotemPoles.Count)
+        if (_FinishedPlayers.Count == _TotemPoles.Count)
             StartCoroutine(IEEndGame());
-        return _NFinishedPlayers;
+        return _FinishedPlayers.Count;
     }
 
     private IEnumerator IEEndGame()
     {
+        GameManager.ReportGameScore(_FinishedPlayers);
         Debug.Log("End Game!");
         yield return new WaitForSeconds(3);
         GameManager.LoadNextLevel();

@@ -10,10 +10,8 @@ public class Player : MonoBehaviour
     [Header("Stats")]
     public string playerName;
     public Color color;
-    [SerializeField] private int score;
 
-    public int Score { get { return score; } }
-    public int oldScore { get; private set; }
+    public int Score { get; private set; }
     public int Index { get { return GetComponent<PlayerInput>().user.index; } } //change if it is called often
     public bool HasHybridModel { get { return hybridModel != null; } }
     private GameObject hybridModel;
@@ -21,6 +19,7 @@ public class Player : MonoBehaviour
     public PlayerActions InputControls { get; private set; }
 
     private bool _hasInitialized;
+    private int _LastShownScore;
 
     private void Start()
     {
@@ -65,8 +64,18 @@ public class Player : MonoBehaviour
 
     public void AddScore(int score)
     {
-        oldScore = this.score;
-        this.score += score;
+        Score += score;
+        //Debug.Log("Added score: " + score + " (total: " + Score + ")");
+    }
+
+    public int GetScore()
+    {
+        _LastShownScore = Score;
+        return Score;
+    }
+    public int GetLastShownScore()
+    {
+        return _LastShownScore;
     }
 
     private IEnumerator DelayedDestruction()

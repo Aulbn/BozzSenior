@@ -24,11 +24,11 @@ public class PlayerScoreCard : PlayerController
     {
         SetPlayer(player);
         background.color = player.color;
-        scoreText.text = player.oldScore.ToString(); //Show old score first
+        scoreText.text = player.GetLastShownScore().ToString(); //Show old score first
         nameText.text = player.playerName;
 
         oldPos = transform.position;
-        Debug.Log(gameObject.name + ", " + transform.position);
+        //Debug.Log(gameObject.name + ", " + transform.position);
 
         toggleSwitch.gameObject.SetActive(false);
         AddInputLock();

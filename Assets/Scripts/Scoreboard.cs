@@ -130,17 +130,28 @@ public class Scoreboard : MonoBehaviour
     {
         PlayerBoard[] orderedBoards = playerBoards.OrderByDescending(board => board.score).ToArray();
 
-        int points = GameManager.Players.Length;
-        int prevScore = orderedBoards[0].score;
+        //int points = GameManager.Players.Length;
+        //int prevScore = orderedBoards[0].score;
 
-        for (int i = 0; i < orderedBoards.Length; i++)
+        //for (int i = 0; i < orderedBoards.Length; i++)
+        //{
+        //    if (!orderedBoards[i].player) continue;
+        //    if (orderedBoards[i].score != prevScore)
+        //        points--;
+        //    orderedBoards[i].player.AddScore(points);
+        //    prevScore = orderedBoards[i].score;
+        //}
+
+        List<Vector2Int> orderedScores = new List<Vector2Int>();
+        foreach (PlayerBoard board in orderedBoards)
         {
-            if (!orderedBoards[i].player) continue;
-            if (orderedBoards[i].score != prevScore)
-                points--;
-            orderedBoards[i].player.AddScore(points);
-            prevScore = orderedBoards[i].score;
+            if (board.player != null)
+                orderedScores.Add(new Vector2Int(board.player.Index, board.score));
         }
+
+        //Debug.Log("nPlayers: " + orderedPlayers.Count);
+        GameManager.ReportGameScore(orderedScores.ToArray());
+
     }
 
 }

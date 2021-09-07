@@ -96,4 +96,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static void ReportGameScore(List<Player> playersInPlacementOrder)
+    {
+        int points = Players.Length;
+
+        for (int i = 0; i < playersInPlacementOrder.Count; i++)
+        {
+            foreach (Player player in Players)
+            {
+                if (player == playersInPlacementOrder[i])
+                {
+                    player.AddScore(points);
+                    points--;
+                    break;
+                }
+            }
+        }
+    }
+
+    public static void ReportGameScore(Vector2Int[] xplayerYpoints)
+    {
+        int points = Players.Length;
+        int prevPoints = xplayerYpoints[0].y;
+
+        for (int i = 0; i < xplayerYpoints.Length; i++)
+        {
+            //if (!orderedBoards[i].player) continue;
+            if (xplayerYpoints[i].y != prevPoints)
+                points--;
+            Players[xplayerYpoints[i].x].AddScore(points);
+            prevPoints = xplayerYpoints[i].y;
+        }
+    }
+
 }

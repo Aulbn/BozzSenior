@@ -33,6 +33,8 @@ public class GameLoop : MonoBehaviour
     public bool playOnStart;
     [SerializeField] public List<GameLoopItem> gameEvents = new List<GameLoopItem>();
 
+    private bool _SkipEvent  = false;
+
     private void Start()
     {
         if (playOnStart)
@@ -44,7 +46,16 @@ public class GameLoop : MonoBehaviour
         foreach (GameLoopItem gameEvent in gameEvents)
         {
             gameEvent.events.Invoke();
-            yield return new WaitForSecondsRealtime(gameEvent.waitTime);
+
+            for (float time = gameEvent.waitTime; time > 0; time -= Time.deltaTime)
+            {
+                if (_SkipEvent)
+                {
+                    _SkipEvent = false;
+                    yield break;
+                }
+                yield return null;
+            }
         }
     }
 
@@ -57,6 +68,11 @@ public class GameLoop : MonoBehaviour
     public void StopLoop()
     {
         StopAllCoroutines();
+    }
+
+    public void SkipEvent()
+    {
+        _SkipEvent = true;
     }
 
     public void DebugPrint(string debug)

@@ -10,7 +10,9 @@ public class SinkingPillar : MonoBehaviour
 
     public bool isActive = true;
 
+    [Header("References")]
     public VisualEffect BoilingVFX;
+    public BoxCollider Collider;
 
     private int nPlayers;
     private Vector3 originPos;
@@ -24,6 +26,19 @@ public class SinkingPillar : MonoBehaviour
     {
         if (!isActive) return;
 
+        //Count players within inside box
+        nPlayers = 0;
+        foreach (PlayerController c in GameManager.Controllers)
+        {
+            if (Collider.bounds.Contains(c.transform.position))
+            {
+                nPlayers++;
+                c.transform.transform.SetParent(transform);
+            }
+            else if (c.transform.parent == transform)
+                c.transform.transform.SetParent(null);
+        }
+
         if (nPlayers > 0)//Sink
         {
             transform.position -= Vector3.up * sinkSpeedMultiplier * nPlayers * Time.deltaTime;
@@ -33,6 +48,7 @@ public class SinkingPillar : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, originPos, riseSpeed * Time.deltaTime);
         }
 
+        //Enable / disable boiling vfx
         if ( BoilingVFX != null)
         {
             if (transform.position.y < 0.5f)
@@ -46,24 +62,4 @@ public class SinkingPillar : MonoBehaviour
         }
 
     }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") && other.transform.parent != transform)
-        {
-            ++nPlayers;
-            other.transform.SetParent(transform);
-        }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            --nPlayers;
-            if (other.transform.parent.Equals(transform))
-                other.transform.parent = null;
-        }
-    }
-
 }
