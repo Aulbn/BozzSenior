@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82670ffc19a5d45439df80d8230154c0, type: 3}
-  m_Name: L_TotemPoles
+  m_Name: L_HitSame
   m_EditorClassIdentifier: 
-  _sceneName: TotemPoles
-  _levelName: Totem Poles
-  _difficulty: 2
-  _categories: 6
+  _sceneName: HitSame
+  _levelName: Hit Same
+  _difficulty: 1
+  _categories: 1
   _picture: {fileID: 0}

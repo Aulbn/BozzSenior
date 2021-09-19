@@ -11,7 +11,7 @@ public class HybridAnimationHandler : MonoBehaviour
 
     public void PlayAnimation(string animationName)
     {
-        Debug.Log("[PLAY ANIMATION] \"" + animationName +"\"");
+        //Debug.Log("[PLAY ANIMATION] \"" + animationName +"\"");
         StopAllCoroutines();
         if (string.IsNullOrEmpty(AnimationCollection.GetAnimationStruct(animationName).AnimationName))
         {

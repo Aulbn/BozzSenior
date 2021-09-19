@@ -13,37 +13,38 @@ public class Scoreboard : MonoBehaviour
     [Serializable]
     public struct PlayerBoard
     {
-        public Image board;
-        public TextMeshProUGUI scoreText;
-        public int score { get; private set; }
-        public Player player;
-        public GameObject gameObject { get { return board.gameObject; } }
-        public RectTransform rectTransform { get { return (RectTransform)board.transform; } }
+        public GameObject Content;
+        public Image Background;
+        public TextMeshProUGUI ScoreText;
+        public int Score { get; private set; }
+        [HideInInspector] public Player Player;
+        //public GameObject GameObject { get { return Background.gameObject; } }
+        public RectTransform RectTransform { get { return (RectTransform)Background.transform; } }
 
         public void Init(Player player)
         {
-            this.player = player;
-            board.color = player.color;
-            gameObject.SetActive(true);
+            this.Player = player;
+            Background.color = player.color;
+            Content.SetActive(true);
         }
         public void Clear()
         {
-            board.color = Color.white;
+            Background.color = Color.white;
             SetScore(0);
-            gameObject.SetActive(false);
+            Content.SetActive(false);
         }
         public void SetScore(int score)
         {
-            this.score = score;
-            scoreText.text = score.ToString();
+            this.Score = score;
+            ScoreText.text = score.ToString();
         }
         public void AddScore(int score)
         {
-            SetScore(this.score + score);
+            SetScore(this.Score + score);
         }
         public override string ToString()
         {
-            return player.playerName + ": " + score;
+            return Player.playerName + ": " + Score;
         }
     }
 
@@ -90,10 +91,10 @@ public class Scoreboard : MonoBehaviour
     {
         for (int i = 0; i < Instance.playerBoards.Length; i++)
         {
-            if (Instance.playerBoards[i].player == player)
+            if (Instance.playerBoards[i].Player == player)
             {
                 Instance.playerBoards[i].AddScore(points);
-                Tweener.Pulse(Instance, Instance.playerBoards[i].rectTransform, 1.2f, .2f, () => { });
+                Tweener.Pulse(Instance, Instance.playerBoards[i].RectTransform, 1.2f, .2f, () => { });
                 //Color originalColor = Instance.playerBoards[i].board.color;
                 //Tweener.CrossFadeColor(Instance, Instance.playerBoards[i].board, Color.white, .1f, () => { 
                 //    Tweener.CrossFadeColor(Instance, Instance.playerBoards[i].board, originalColor, .1f, () => { });
@@ -107,17 +108,17 @@ public class Scoreboard : MonoBehaviour
     {
         foreach (PlayerBoard board in GetLeaders())
         {
-            Tweener.Pulse(this, board.rectTransform, 2, 3f, () => { });
+            Tweener.Pulse(this, board.RectTransform, 2, 3f, () => { });
         }
     }
 
     public PlayerBoard[] GetLeaders()
     {
-        PlayerBoard[] orderedBoards = playerBoards.OrderByDescending(board => board.score).ToArray();
+        PlayerBoard[] orderedBoards = playerBoards.OrderByDescending(board => board.Score).ToArray();
         int nLeaders = 1;
         for (int i = 1; i < orderedBoards.Length; i++)
         {
-            if (orderedBoards[i].score != orderedBoards[i - 1].score)
+            if (orderedBoards[i].Score != orderedBoards[i - 1].Score)
                 break;
             nLeaders++;
         }
@@ -128,7 +129,7 @@ public class Scoreboard : MonoBehaviour
 
     public void CalculateWinningPoints()
     {
-        PlayerBoard[] orderedBoards = playerBoards.OrderByDescending(board => board.score).ToArray();
+        PlayerBoard[] orderedBoards = playerBoards.OrderByDescending(board => board.Score).ToArray();
 
         //int points = GameManager.Players.Length;
         //int prevScore = orderedBoards[0].score;
@@ -145,8 +146,8 @@ public class Scoreboard : MonoBehaviour
         List<Vector2Int> orderedScores = new List<Vector2Int>();
         foreach (PlayerBoard board in orderedBoards)
         {
-            if (board.player != null)
-                orderedScores.Add(new Vector2Int(board.player.Index, board.score));
+            if (board.Player != null)
+                orderedScores.Add(new Vector2Int(board.Player.Index, board.Score));
         }
 
         //Debug.Log("nPlayers: " + orderedPlayers.Count);

@@ -18,7 +18,7 @@ public class LevelObject : ScriptableObject
     [Header("Level Info")]
     [SerializeField] private string _levelName;
     [Multiline] private string _description;
-    [SerializeField][Range(0, 3)] private int _difficulty;
+    [SerializeField][Range(0, 5)] private int _difficulty;
     [EnumFlag] [SerializeField] private Category _categories;
     [SerializeField] private Sprite _picture;
 
