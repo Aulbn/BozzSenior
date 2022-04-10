@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028487, g: 0.22571485, b: 0.306924, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571436, b: 0.30692264, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -450,6 +450,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -546,6 +547,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -737,6 +739,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 50, y: -141.181, z: 0}
+--- !u!1 &1680080591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1680080593}
+  - component: {fileID: 1680080592}
+  m_Layer: 0
+  m_Name: Console
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1680080592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680080591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f891793fc83f8e340adaa3e44341977f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1680080593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680080591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1690966761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,9 +1395,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
         type: 3}
+      propertyPath: LidboardLevel
+      value: 
+      objectReference: {fileID: 11400000, guid: 9965579db382d114ab489eab4542b923,
+        type: 2}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: LevelQueue.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
       propertyPath: levelQueue.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: LevelQueue.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b71825664f372540a640497d39ef2e8,
+        type: 2}
+    - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
+        type: 3}
+      propertyPath: LevelQueue.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b71825664f372540a640497d39ef2e8,
+        type: 2}
     - target: {fileID: 1164371454441153166, guid: 2838875aa38e7af498e5399f07379956,
         type: 3}
       propertyPath: levelQueue.Array.data[0]

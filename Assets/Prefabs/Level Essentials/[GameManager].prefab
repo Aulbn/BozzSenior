@@ -45,6 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players: []
   currentLevel: 0
-  midboardSceneName: Midboard
-  levelQueue: []
+  MidboardLevel: {fileID: 11400000, guid: 9965579db382d114ab489eab4542b923, type: 2}
+  LevelQueue: []
   colors: []

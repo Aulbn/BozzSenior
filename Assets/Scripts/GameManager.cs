@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
     public List<Player> players;
+    public static bool HasActiveInput { get; private set; }
     [Header("Scene Management")]
-    public int currentLevel;
-    public string midboardSceneName;
-    public LevelObject[] levelQueue; //Kanske ska vara queue sen, men vill se i inpectorn nu
+    public int CurrentLevel;
+    public LevelObject MidboardLevel;
+    public LevelObject[] LevelQueue; //Kanske ska vara queue sen, men vill se i inpectorn nu
 
     [Header("DEBUG")]
     public Color[] colors;
@@ -27,6 +29,8 @@ public class GameManager : MonoBehaviour
         if (!Instance) Instance = this;
         else Destroy(gameObject);
         DontDestroyOnLoad(this);
+
+        HasActiveInput = true;
     }
 
     public static void AddPlayer(Player player)
@@ -64,19 +68,19 @@ public class GameManager : MonoBehaviour
 
     public static void LoadNextLevel()
     {
-        Instance.currentLevel++;
-        int adjustedLevelIndex = Instance.currentLevel / 2;
+        Instance.CurrentLevel++;
+        int adjustedLevelIndex = Instance.CurrentLevel / 2;
 
-        if (Instance.currentLevel % 2 == 0)
+        if (Instance.CurrentLevel % 2 == 0)
         {
             //Load midboard
-            LoadScene(Instance.midboardSceneName);
+            LoadScene(Instance.MidboardLevel.sceneName);
         }
         else
         {//Load level
-            Debug.Log("Current level index: " + Instance.currentLevel);
-            if (adjustedLevelIndex < Instance.levelQueue.Length)
-                LoadScene(Instance.levelQueue[adjustedLevelIndex].sceneName);
+            Debug.Log("Current level index: " + Instance.CurrentLevel);
+            if (adjustedLevelIndex < Instance.LevelQueue.Length)
+                LoadScene(Instance.LevelQueue[adjustedLevelIndex].sceneName);
             else
             {
                 //Start last scene
@@ -126,6 +130,18 @@ public class GameManager : MonoBehaviour
                 points--;
             Players[xplayerYpoints[i].x].AddScore(points);
             prevPoints = xplayerYpoints[i].y;
+        }
+    }
+
+    public static void SetActiveInput(bool value)
+    {
+        HasActiveInput = value;
+        foreach (Player player in Instance.players)
+        {
+            if (value)
+                player.Controller.AddInputLock();
+            else
+                player.Controller.RemoveInputLock();
         }
     }
 

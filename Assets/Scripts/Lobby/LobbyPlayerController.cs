@@ -113,6 +113,8 @@ public class LobbyPlayerController : PlayerController
     {
         _renderer.material.SetColor("_BaseColor", colors[colorIndex]);
         //Set playstation gamepad color (don't know if it works)
+        if (Gamepad.all.Count < 1)
+            return;
         var gamepad = (UnityEngine.InputSystem.DualShock.DualShockGamepad)Gamepad.all[Player.Index];
         gamepad.SetLightBarColor(colors[colorIndex]);
     }
