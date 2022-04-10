@@ -17,6 +17,8 @@ public class Console : MonoBehaviour
 
     List<DebugCommandBase> commandList;
     List<string> printList;
+    List<string> helpList;
+    int helpListIndex;
 
     private void Awake()
     {
@@ -29,6 +31,7 @@ public class Console : MonoBehaviour
         printList = new List<string>();
         commandList = new List<DebugCommandBase>();
         commandList.Add(new DebugCommand("nextlevel", "Load the next level in the list.", "nextlevel", () => { GameManager.LoadNextLevel(); }));
+        commandList.Add(new DebugCommand("returntolobby", "Load the lobby scene.", "returntolobby", () => { GameManager.LoadScene("Lobby"); }));
     }
     void Update()
     {
@@ -49,8 +52,19 @@ public class Console : MonoBehaviour
     {
         if (!isShowingConsole) return;
 
-        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return)
-            OnReturn();
+        if (Event.current.type == EventType.KeyDown) {
+            if (Event.current.keyCode == KeyCode.Return)
+                OnReturn();
+            if (Event.current.keyCode == KeyCode.DownArrow)
+                helpListIndex += 1;
+            if (Event.current.keyCode == KeyCode.UpArrow)
+                helpListIndex -= 1;
+            if (Event.current.keyCode == KeyCode.Tab)
+            {
+                input = helpList[helpListIndex];
+            }
+        }
+
 
         float y = 0;
 
@@ -76,22 +90,35 @@ public class Console : MonoBehaviour
         //Help box
         if (input.Length > 0)
         {
-            List<string> helpList = new List<string>();
+            helpList = new List<string>();
             foreach (DebugCommandBase command in commandList){
                 if (command.CommandID.Contains(input))
                 {
                     string commandText = command.CommandID;
-                    //helpList.Add(command.CommandID);
-                    helpList.Add(commandText.Substring(0, commandText.IndexOf(input)) + "<b>"));
+                    helpList.Add($"{commandText.Substring(0, commandText.IndexOf(input))}" +
+                        $"<b>{commandText.Substring(commandText.IndexOf(input), input.Length)}" +
+                        $"</b>{commandText.Substring(commandText.IndexOf(input) + input.Length)}");
                 }
             }
 
             Rect helpBoxRect = new Rect(0, y - Mathf.Min(150, helpList.Count * rowHeight), Screen.width, Mathf.Min(150, helpList.Count * rowHeight));
             GUI.Box(helpBoxRect, "");
             helpScroll = GUI.BeginScrollView(helpBoxRect, helpScroll, viewport);
+            helpListIndex = Mathf.Clamp(helpListIndex, 0, helpList.Count - 1);
             for (int i = 0; i < helpList.Count; i++)
             {
-                GUI.Label(new Rect(10, rowHeight * i, viewport.width, rowHeight), helpList[i], consoleStyle);
+                Rect helpRect = new Rect(10, rowHeight * i, viewport.width, rowHeight);
+                if (i == helpListIndex)
+                {
+                    Color backgroundColor = GUI.backgroundColor;
+                    GUI.backgroundColor = Color.white;
+                    GUIStyle helpStyle = new GUIStyle(consoleStyle);
+                    helpStyle.normal.background = Texture2D.whiteTexture;
+                    helpStyle.normal.textColor = Color.black;
+                    GUI.Label(helpRect, helpList[i], helpStyle);
+                    GUI.backgroundColor = backgroundColor;
+                }else
+                    GUI.Label(helpRect, helpList[i], consoleStyle);
             }
             GUI.EndScrollView();
         }
