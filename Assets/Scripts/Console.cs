@@ -61,7 +61,7 @@ public class Console : MonoBehaviour
                 helpListIndex -= 1;
             if (Event.current.keyCode == KeyCode.Tab)
             {
-                input = helpList[helpListIndex];
+                input = helpList[helpListIndex].Replace("<b>", "").Replace("</b>", "");
             }
         }
 
@@ -131,13 +131,14 @@ public class Console : MonoBehaviour
         {
             if (input.Equals(command.CommandID) && command as DebugCommand != null)
             {
+                Print($"COMMAND: {input}");
                 ((DebugCommand)command).Invoke();
-                print(input);
                 input = "";
                 return;
             }
         }
-        Print("Messed up the command, somehow.");
+        Print($"NON COMMAND: {input}");
+        input = "";
     }
 
     public void Print(string message)
