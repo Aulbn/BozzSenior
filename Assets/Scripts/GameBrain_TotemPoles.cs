@@ -28,7 +28,7 @@ public class GameBrain_TotemPoles : MonoBehaviour
 
     public void TogglePlayerInput(bool enable)
     {
-        GameManager.TogglePlayerControllerInput(enable);
+        GameManager.SetPlayerControllerInput(enable);
     }
 
     public int RegisterFinish(Player player)

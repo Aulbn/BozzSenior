@@ -152,7 +152,7 @@ public class Console : MonoBehaviour
     public void ToggleConsole()
     {
         isShowingConsole = !isShowingConsole;
-        GameManager.SetActiveInput(isShowingConsole);
+        GameManager.SetPlayerControllerInput(isShowingConsole, !isShowingConsole);
     }
 }
 

@@ -7,7 +7,7 @@ public abstract class PlayerController : MonoBehaviour
 {
     public Transform HybridModelParent;
     public Player Player { get; private set; }
-    public bool HasControl { get { return inputLocks == 0; } }
+    public bool HasControl { get { return inputLocks == 0 && GameManager.HasActiveInput; } }
     private int inputLocks = 0;
 
     private Coroutine _delayedEnableCoroutine;

@@ -89,14 +89,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void TogglePlayerControllerInput(bool enableMovement)
+    public static void SetPlayerControllerInput(bool enableMovement, bool global = false)
     {
-        foreach (PlayerController c in Controllers)
+        if (global)
         {
-            if (enableMovement)
-                c.RemoveInputLock();
-            else
-                c.AddInputLock();
+            HasActiveInput = enableMovement;
+        }
+        else
+        {
+            foreach (PlayerController c in Controllers)
+            {
+                if (enableMovement)
+                    c.RemoveInputLock();
+                else
+                    c.AddInputLock();
+            }
         }
     }
 
@@ -132,17 +139,4 @@ public class GameManager : MonoBehaviour
             prevPoints = xplayerYpoints[i].y;
         }
     }
-
-    public static void SetActiveInput(bool value)
-    {
-        HasActiveInput = value;
-        foreach (Player player in Instance.players)
-        {
-            if (value)
-                player.Controller.AddInputLock();
-            else
-                player.Controller.RemoveInputLock();
-        }
-    }
-
 }
