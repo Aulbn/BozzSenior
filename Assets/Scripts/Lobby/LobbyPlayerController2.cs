@@ -29,103 +29,103 @@ public class LobbyPlayerController2 : PlayerController
 
     public void Initiate(Player player, Lobby2 lobby, UIList outfitList, ToggleSwitch toggleSwitch)
     {
-        SetPlayer(player);
-        this.lobby = lobby;
-        _outfitList = outfitList;
-        _readyToggle = toggleSwitch;
+        //SetPlayer(player);
+        //this.lobby = lobby;
+        //_outfitList = outfitList;
+        //_readyToggle = toggleSwitch;
 
-        player.SetController(this);
-        //cursorIndex = 0;
-        hatIndex = hatModels.Length;
-        outfitList.MoveTo(cursorIndex);
-        UpdateColor();
+        //player.SetController(this);
+        ////cursorIndex = 0;
+        //hatIndex = hatModels.Length;
+        //outfitList.MoveTo(cursorIndex);
+        //UpdateColor();
     }
 
     private void Update()
     {
-        _outfitList.SetPosition(new Vector2(lobby.mainCamera.Camera.WorldToScreenPoint(transform.position).x, (Screen.height/3)*2));
-        ((RectTransform)_readyToggle.transform).position = new Vector2(lobby.mainCamera.Camera.WorldToScreenPoint(transform.position).x, ((RectTransform)_readyToggle.transform).rect.height);
+        //_outfitList.SetPosition(new Vector2(lobby.mainCamera.Camera.WorldToScreenPoint(transform.position).x, (Screen.height/3)*2));
+        //((RectTransform)_readyToggle.transform).position = new Vector2(lobby.mainCamera.Camera.WorldToScreenPoint(transform.position).x, ((RectTransform)_readyToggle.transform).rect.height);
     }
 
     protected override void OnMove(InputAction.CallbackContext context)
     {
-        if (isReady) return;
+        //if (isReady) return;
 
-        Vector2 input = context.ReadValue<Vector2>();
+        //Vector2 input = context.ReadValue<Vector2>();
 
-        if (input.x != 0)
-        {
-            switch (cursorIndex)
-            {
-                case 0:
-                    colorIndex += (int)input.normalized.x;
-                    colorIndex = MathUtils.Mod(colorIndex, colors.Length);
-                    UpdateColor();
-                    break;
-                case 1:
-                    hatIndex += (int)input.normalized.x;
-                    hatIndex = MathUtils.Mod(hatIndex, hatModels.Length + 1);
-                    if (_currentHat != null) Destroy(_currentHat);
-                    if (hatIndex != hatModels.Length) //Keep one slot open for no hat
-                        _currentHat = Instantiate(hatModels[hatIndex], currentHybrid.hatParent);
-                    break;
-                default:
-                    break;
-            }
-        }
-        else
-        {
-            cursorIndex = _outfitList.Move(-(int)input.normalized.y);
-        }
-        _outfitList.AnimateButton(input.normalized);
+        //if (input.x != 0)
+        //{
+        //    switch (cursorIndex)
+        //    {
+        //        case 0:
+        //            colorIndex += (int)input.normalized.x;
+        //            colorIndex = MathUtils.Mod(colorIndex, colors.Length);
+        //            UpdateColor();
+        //            break;
+        //        case 1:
+        //            hatIndex += (int)input.normalized.x;
+        //            hatIndex = MathUtils.Mod(hatIndex, hatModels.Length + 1);
+        //            if (_currentHat != null) Destroy(_currentHat);
+        //            if (hatIndex != hatModels.Length) //Keep one slot open for no hat
+        //                _currentHat = Instantiate(hatModels[hatIndex], currentHybrid.hatParent);
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
+        //else
+        //{
+        //    cursorIndex = _outfitList.Move(-(int)input.normalized.y);
+        //}
+        //_outfitList.AnimateButton(input.normalized);
     }
 
     protected override void OnSouth(InputAction.CallbackContext context)
     {
-        ToggleReady(_readyToggle.Toggle());
+        //ToggleReady(_readyToggle.Toggle());
     }
 
     protected override void OnEast(InputAction.CallbackContext context)
     {
-        if (!isReady)
-        {
-            Disconnect();
-            return;
-        }
-        _readyToggle.Toggle(false);
-        ToggleReady(false);
+        //if (!isReady)
+        //{
+        //    Disconnect();
+        //    return;
+        //}
+        //_readyToggle.Toggle(false);
+        //ToggleReady(false);
     }
 
-    private void ToggleReady(bool isOn)
-    {
-        isReady = isOn;
-        _outfitList.gameObject.SetActive(!isReady);
-        if (isReady)
-            lobby.nOReadySwitches++;
-        else
-            lobby.nOReadySwitches--;
-    }
+    //private void ToggleReady(bool isOn)
+    //{
+        //isReady = isOn;
+        //_outfitList.gameObject.SetActive(!isReady);
+        //if (isReady)
+        //    lobby.nOReadySwitches++;
+        //else
+        //    lobby.nOReadySwitches--;
+    //}
 
-    private void Disconnect()
-    {
-        Player.Disconnect();
-        Destroy(_readyToggle.gameObject);
-        Destroy(_outfitList.gameObject);
-        Destroy(gameObject);
-    }
+    //private void Disconnect()
+    //{
+    //    Player.Disconnect();
+    //    Destroy(_readyToggle.gameObject);
+    //    Destroy(_outfitList.gameObject);
+    //    Destroy(gameObject);
+    //}
 
-    private void UpdateColor()
-    {
-        _renderer.material.SetColor("_BaseColor", colors[colorIndex]);
-        //Set playstation gamepad color (don't know if it works)
-        if (Gamepad.all.Count < 1)
-            return;
-        var gamepad = (UnityEngine.InputSystem.DualShock.DualShockGamepad)Gamepad.all[Player.Index];
-        gamepad.SetLightBarColor(colors[colorIndex]);
-    }
-    public void SaveHybridCharacter()
-    {
-        Player.SaveHybridModel(currentHybrid.gameObject);
-        Player.color = colors[colorIndex];
-    }
+    //private void UpdateColor()
+    //{
+    //    _renderer.material.SetColor("_BaseColor", colors[colorIndex]);
+    //    //Set playstation gamepad color (don't know if it works)
+    //    if (Gamepad.all.Count < 1)
+    //        return;
+    //    var gamepad = (UnityEngine.InputSystem.DualShock.DualShockGamepad)Gamepad.all[Player.Index];
+    //    gamepad.SetLightBarColor(colors[colorIndex]);
+    //}
+    //public void SaveHybridCharacter()
+    //{
+    //    Player.SaveHybridModel(currentHybrid.gameObject);
+    //    Player.color = colors[colorIndex];
+    //}
 }

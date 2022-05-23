@@ -22,7 +22,7 @@ public class Lobby2 : MonoBehaviour
 
     public void OnPlayerJoined(PlayerInput player)
     {
-        //player.GetComponent<Player>().Init();
+        player.GetComponent<Player>().Init();
         //LobbyPlayerController2 pc = Instantiate(lobbyPlayerControllerPrefab, spawnPoints[GameManager.Players.Length]).GetComponent<LobbyPlayerController2>();
         //ToggleSwitch readySwitch = Instantiate(readyTogglePrefab, contentHolder).GetComponent<ToggleSwitch>();
         ////_readySwitches.Add(readySwitch);
@@ -33,4 +33,5 @@ public class Lobby2 : MonoBehaviour
         //mainCamera.AddTarget(pc.transform);
         //Debug.Log(player.user.index + " joined");
     }
+
 }
