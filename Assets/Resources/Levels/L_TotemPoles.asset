@@ -16,4 +16,5 @@ MonoBehaviour:
   _levelName: Totem Poles
   _difficulty: 2
   _categories: 6
+  _EstimatedPlaytime: {x: 20, y: 60}
   _picture: {fileID: 0}

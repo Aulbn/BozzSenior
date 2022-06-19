@@ -16,4 +16,5 @@ MonoBehaviour:
   _levelName: Mid Board
   _difficulty: 0
   _categories: 2
+  _EstimatedPlaytime: {x: 10, y: 20}
   _picture: {fileID: 0}

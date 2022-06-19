@@ -20,6 +20,7 @@ public class LevelObject : ScriptableObject
     [Multiline] private string _description;
     [SerializeField][Range(0, 5)] private int _difficulty;
     [EnumFlag] [SerializeField] private Category _categories;
+    [SerializeField] private Vector2 _EstimatedPlaytime;
     [SerializeField] private Sprite _picture;
 
     public string sceneName { get { return _sceneName; } }
@@ -28,6 +29,8 @@ public class LevelObject : ScriptableObject
     public int difficulty { get { return _difficulty; } }
     public Category categories { get { return _categories; } }
     public Sprite picture { get { return _picture; } }
+    public float MinTime { get { return _EstimatedPlaytime.x; } }
+    public float MaxTime { get { return _EstimatedPlaytime.y; } }
 
     public string GetCategoryName()
     {
